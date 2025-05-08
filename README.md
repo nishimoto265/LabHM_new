@@ -11,7 +11,9 @@
 
 ウェブサイトのデザインは [@remon-nomer66](https://github.com/remon-nomer66) によって作成されました。
 
-完成予定のデザインイメージは、[こちら](public/logo-white.png)で確認できます。
+完成予定のデザインイメージ:
+
+![デザインプレビュー](public/logo-white.png)
 
 ## 実装
 

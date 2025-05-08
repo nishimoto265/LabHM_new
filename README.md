@@ -27,8 +27,7 @@
 *   **React**: UIライブラリ
 *   **TypeScript**: JavaScriptのスーパーセット
 *   **Tailwind CSS**: CSSフレームワーク
-*   **shadcn/ui**: UIコンポーネントライブラリ (package.json内の依存関係から推測)
-*   **Vercel**: (Next.jsの標準的なデプロイ先として言及)
+*   **shadcn/ui**: UIコンポーネントライブラリ 
 
 詳細な依存関係は `package.json` を参照してください。
 

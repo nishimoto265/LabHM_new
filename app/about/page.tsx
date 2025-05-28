@@ -1,11 +1,9 @@
-"use client"
-
 import Image from "next/image"
-import { useLanguage } from "@/contexts/language-context"
 import { aboutTranslations } from "@/translations/about"
+import { getImagePath } from "@/lib/utils"
 
 export default function AboutPage() {
-  const { language } = useLanguage()
+  const language = "ja"
   const t = aboutTranslations[language]
 
   return (
@@ -15,10 +13,10 @@ export default function AboutPage() {
         <div className="container py-16">
           {/* About タイトル */}
           <div className="text-center mb-16">
-            <div className="relative w-full max-w-xs mx-auto h-20 mb-2">
-              <Image src="/images/about.png" alt="About" fill className="object-contain" priority />
+            <div className="relative w-full max-w-md mx-auto h-16 mb-4">
+              <Image src={getImagePath("/images/logo_bout.png")} alt="About" fill className="object-contain" priority unoptimized />
             </div>
-            <p className="text-xl">{t.subtitle}</p>
+            <p className="text-lg">{t.subtitle}</p>
           </div>
 
           {/* 研究室紹介文 */}
@@ -31,7 +29,7 @@ export default function AboutPage() {
             {/* 左側の画像 - 1つだけ */}
             <div className="md:w-1/3">
               <div className="relative h-64 w-full overflow-hidden">
-                <Image src="/images/thithizin.jpg" alt="ThiThiZin教授" fill className="object-cover" />
+                <Image src={getImagePath("/images/thithizin.jpg")} alt="ThiThiZin教授" fill className="object-contain" />
               </div>
             </div>
 

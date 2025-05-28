@@ -1,14 +1,18 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter, Noto_Sans_JP } from "next/font/google"
+import { Inter, Noto_Sans_JP, Caveat } from "next/font/google"
 import "./globals.css"
 import Header from "@/components/layout/header"
 import Footer from "@/components/layout/footer"
-import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/contexts/language-context"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 const notoSansJP = Noto_Sans_JP({ subsets: ["latin"], variable: "--font-noto-sans-jp" })
+const caveat = Caveat({ 
+  subsets: ["latin"], 
+  variable: "--font-caveat",
+  weight: ["400", "500", "600", "700"]
+})
 
 export const metadata: Metadata = {
   title: "情報処理システム研究室 | 宮崎大学",
@@ -23,17 +27,15 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ja" suppressHydrationWarning>
-      <body className={`${inter.variable} ${notoSansJP.variable} font-sans`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <LanguageProvider>
-            <div className="flex min-h-screen flex-col">
-              <Header />
-              <main className="flex-1">{children}</main>
-              <Footer />
-            </div>
-          </LanguageProvider>
-        </ThemeProvider>
+    <html lang="ja">
+      <body className={`${inter.variable} ${notoSansJP.variable} ${caveat.variable} font-sans`}>
+        <LanguageProvider>
+          <div className="flex min-h-screen flex-col">
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
+        </LanguageProvider>
       </body>
     </html>
   )

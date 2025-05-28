@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffffff; /* 背景色はお好みで調整 */
+            overflow: hidden;
+        }
+
+        #splash-logo {
+            width: 300px; /* ロゴのサイズはお好みで調整 */
+            animation: fadeOut 2s ease-in-out forwards;
+            animation-delay: 1s; /* 表示後、1秒待ってからフェードアウト開始 */
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <img id="splash-logo" src="/logo.png" alt="Logo">
+
+    <script>
+        const logoElement = document.getElementById('splash-logo');
+        logoElement.addEventListener('animationend', () => {
+            // アニメーション完了後にホームページ（Next.jsアプリのルート）に遷移
+            window.location.href = '/home'; // Next.jsアプリが/homeで提供されている場合
+                                        // 通常のルートなら '/'
+        });
+    </script>
+</body>
+</html> 

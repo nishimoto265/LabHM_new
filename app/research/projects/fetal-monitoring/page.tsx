@@ -1,9 +1,8 @@
-"use client"
+
 
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { useLanguage } from "@/contexts/language-context"
 
 // 翻訳データを定義
 const translations = {
@@ -105,16 +104,26 @@ const translations = {
 
 export default function FetalMonitoringPage() {
   // 言語コンテキストを使用
-  const { language } = useLanguage()
+  const language = "ja"
 
   return (
     <div>
       {/* ヘッダーセクション */}
-      <section className="bg-gray-100 py-16">
-        <div className="container">
+      <section 
+        className="relative py-16 md:py-20 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: "url('/images/normal_header.png')"
+        }}
+      >
+        {/* オーバーレイ */}
+        <div className="absolute inset-0 bg-black/30"></div>
+        
+        {/* コンテンツ */}
+        <div className="container relative z-10">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">{translations.pageTitle[language]}</h1>
-            <p className="text-xl text-gray-600">{translations.pageSubtitle[language]}</p>
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight tracking-tighter text-white drop-shadow-lg">
+              {translations.pageTitle[language]}
+            </h1>
           </div>
         </div>
       </section>

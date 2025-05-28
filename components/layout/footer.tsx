@@ -4,6 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { ChevronRight } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
+import { getImagePath } from "@/lib/utils"
 
 export default function Footer() {
   const { language } = useLanguage()
@@ -69,7 +70,12 @@ export default function Footer() {
       {/* コンタクトセクション */}
       <div className="relative py-16">
         <div className="absolute inset-0 z-0">
-          <Image src="/images/contact.jpeg" alt="コンタクト背景" fill className="object-cover opacity-30" />
+          <Image
+            src={getImagePath("/images/contact.jpeg")}
+            alt="コンタクト背景"
+            fill
+            className="object-cover opacity-30"
+          />
         </div>
         <div className="container relative z-10">
           <div className="grid md:grid-cols-2 gap-8 items-start">
@@ -94,7 +100,13 @@ export default function Footer() {
         <div className="container">
           <div className="flex justify-start pt-4">
             <Link href="/">
-              <Image src="/logo.png" alt="THITHILAB" width={200} height={50} className="invert" />
+              <Image
+                src={getImagePath("/logo.png")}
+                alt="THITHILAB"
+                width={200}
+                height={50}
+                className="invert"
+              />
             </Link>
           </div>
         </div>
@@ -242,7 +254,7 @@ export default function Footer() {
               <ul className="space-y-4">
                 <li>
                   <Link
-                    href="/students"
+                    href="/career"
                     className="text-xs text-gray-400 hover:text-white transition-colors flex items-center"
                   >
                     <ChevronRight className="h-2 w-2 mr-1" />
@@ -274,8 +286,30 @@ export default function Footer() {
       {/* コピーライトセクション */}
       <div className="border-t border-gray-800 py-8">
         <div className="container">
-          <div className="flex flex-col items-center justify-center">
+          <div className="relative">
+            <div className="flex justify-center">
             <p className="text-sm text-gray-400">{text.copyright}</p>
+            </div>
+            <div className="absolute right-0 top-0 flex items-center space-x-4">
+              <a target="_blank" rel="noopener noreferrer" href="https://www.jka-cycle.jp/">
+                <Image
+                  src={getImagePath("/images/JKA.png")}
+                  alt="JKA"
+                  width={100}
+                  height={50}
+                  className="opacity-80 hover:opacity-100 transition-opacity"
+                />
+              </a>
+              <a target="_blank" rel="noopener noreferrer" href="https://keirin.jp/pc/login">
+                <Image
+                  src={getImagePath("/images/keirin.gif")}
+                  alt="Keirin"
+                  width={100}
+                  height={50}
+                  className="opacity-80 hover:opacity-100 transition-opacity"
+                />
+              </a>
+            </div>
           </div>
         </div>
       </div>

@@ -26,7 +26,7 @@ export const aboutTranslations = {
   },
   en: {
     title: "About",
-    subtitle: "About Our Laboratory",
+    subtitle: "About",
     introduction:
       "The ThiThiZin Laboratory tackles social challenges in diverse fields such as healthcare, agriculture, and elderly care by utilizing cutting-edge technologies in image processing, artificial intelligence, and data science. We aim to be a bridge between technology and society, promoting innovation through the 'fusion of knowledge'.",
     researchAreas: {

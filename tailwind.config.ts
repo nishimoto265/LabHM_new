@@ -9,6 +9,15 @@ const config = {
     "./src/**/*.{ts,tsx}",
     "*.{js,ts,jsx,tsx,mdx}",
   ],
+  safelist: [
+    'bg-red-600',
+    'bg-green-600',
+    'bg-purple-600',
+    'bg-blue-600',
+    'bg-indigo-600',
+    'bg-orange-600',
+    'bg-gray-600',
+  ],
   prefix: "",
   theme: {
     container: {
@@ -63,6 +72,8 @@ const config = {
         sans: ["var(--font-noto-sans-jp)", "sans-serif"],
         "noto-sans-jp": ["var(--font-noto-sans-jp)", "sans-serif"],
         inter: ["var(--font-inter)", "sans-serif"],
+        caveat: ["var(--font-caveat)", "cursive"],
+        "bradley-hand": ["Bradley Hand", "Bradley Hand ITC", "cursive"],
       },
       keyframes: {
         "accordion-down": {

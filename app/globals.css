@@ -80,4 +80,23 @@
     content: "";
     @apply absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-primary mt-2;
   }
+
+  /* カスタム行数制限クラス */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.5;
+    max-height: calc(1.5em * 2);
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.5;
+    max-height: calc(1.5em * 3);
+  }
 }

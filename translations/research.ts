@@ -1,7 +1,7 @@
 export const researchTranslations = {
   ja: {
     title: "研究",
-    subtitle: "画像処理とAIを活用した社会課題解決の取り組み",
+    subtitle: "研究概要",
     overview:
       "ThiThiZin研究室では、画像処理技術と人工知能を融合させ、医療、農業、高齢者ケアなど様々な分野における社会課題の解決に取り組んでいます。理論研究だけでなく、実社会での実装を見据えた応用研究を重視し、産学官連携による実証実験も積極的に推進しています。",
     researchAreas: "研究分野",
@@ -27,7 +27,7 @@ export const researchTranslations = {
   },
   en: {
     title: "Research",
-    subtitle: "Addressing Social Challenges through Image Processing and AI",
+    subtitle: "Research",
     overview:
       "At the ThiThiZin Laboratory, we integrate image processing technology and artificial intelligence to address social challenges in various fields such as healthcare, agriculture, and elderly care. We emphasize applied research with a view to implementation in the real world, not just theoretical research, and actively promote demonstration experiments through industry-academia-government collaboration.",
     researchAreas: "Research Areas",

@@ -1,14 +1,9 @@
-"use client"
-
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-// 言語コンテキストを使用するために必要なインポートを追加
-import { useLanguage } from "@/contexts/language-context"
+import { getImagePath } from "@/lib/utils"
 
-// 既存のインポートはそのまま維持
-
-// さくらサイエンス年度データの型定義を更新
+// さくらサイエンス年度データの型定義
 type SakuraYear = {
   year: {
     ja: string
@@ -22,17 +17,17 @@ type SakuraYear = {
   link?: string
 }
 
-// さくらサイエンス年度データを多言語対応に更新
+// さくらサイエンス年度データ
 const sakuraYears: SakuraYear[] = [
   {
     year: {
       ja: "2025年度",
       en: "2025 Academic Year",
     },
-    image: "/images/sakura2025s1.jpg",
+    image: getImagePath("/images/sakura2025s1.jpg"),
     description: {
-      ja: "着物体験を通じた日本文化交流プログラム",
-      en: "Japanese Cultural Exchange Program through Kimono Experience",
+      ja: "さくらサイエンスプラン ASEAN諸国学生向け ITとDXを学ぶ短期研修コース",
+      en: "Sakura Science Plan Short-term Training Course on IT and DX for ASEAN Students",
     },
   },
   {
@@ -40,217 +35,206 @@ const sakuraYears: SakuraYear[] = [
       ja: "2024年度",
       en: "2024 Academic Year",
     },
-    image: "/images/sakura_2024.jpg",
-    description: {
-      ja: "日本の歴史的名所を訪問する文化体験プログラム",
-      en: "Cultural Experience Program Visiting Historical Sites in Japan",
-    },
+    image: getImagePath("/images/sakura_2024.jpg"),
   },
   {
     year: {
       ja: "2018年度",
       en: "2018 Academic Year",
     },
-    image: "/images/sakura_2018.JPG",
-    description: {
-      ja: "科学館見学と最新技術体験プログラム",
-      en: "Science Museum Visit and Latest Technology Experience Program",
-    },
+    image: getImagePath("/images/sakura_2018.JPG"),
   },
   {
     year: {
       ja: "2017年度",
       en: "2017 Academic Year",
     },
-    image: "/images/sakura_2017.jpg",
-    description: {
-      ja: "ミャンマーの大学と宮崎大学の連携プログラム",
-      en: "Collaboration Program between Myanmar Universities and Miyazaki University",
-    },
+    image: getImagePath("/images/sakura_2017.jpg"),
   },
   {
     year: {
       ja: "2015年度",
       en: "2015 Academic Year",
     },
-    image: "/images/sakura_2015.JPG",
-    description: {
-      ja: "地方訪問と日本の農業技術体験プログラム",
-      en: "Rural Visit and Japanese Agricultural Technology Experience Program",
-    },
+    image: getImagePath("/images/sakura_2015.JPG"),
   },
 ]
 
-// 翻訳データを定義
-const translations = {
-  pageTitle: {
-    ja: "さくらサイエンス",
-    en: "Sakura Science",
-  },
-  pageSubtitle: {
-    ja: "日本と世界の科学技術交流プログラム",
-    en: "Japan-World Science and Technology Exchange Program",
-  },
-  aboutTitle: {
-    ja: "さくらサイエンスプログラムとは",
-    en: "About the Sakura Science Program",
-  },
-  aboutDescription: {
-    ja: "さくらサイエンスプログラムは、新たな時代の社会を担う、世界の優れた人材を日本に短期間招き、日本の最先端な科学技術や文化に触れていただくプログラムです。日本の受入れ機関と、海外の送出し機関が作成した交流計画を幅広く公募し、採択しています。",
-    en: "The Sakura Science Program invites talented individuals from around the world who will lead society in the new era to Japan for a short period to experience Japan's cutting-edge science, technology, and culture. The program widely solicits and adopts exchange plans created by Japanese host institutions and overseas sending institutions.",
-  },
-  purposeTitle: {
-    ja: "さくらサイエンスプログラムの目的",
-    en: "Purpose of the Sakura Science Program",
-  },
-  purposeDescription1: {
-    ja: "さくらサイエンスプログラムは、産学官の緊密な連携により、諸外国・地域の青少年の我が国への招へい等を通じて、我が国の青少年との科学技術分野の交流を行う事業です。これを通して、",
-    en: "The Sakura Science Program is a project that conducts exchanges in the field of science and technology with Japanese youth through the invitation of young people from various countries and regions to Japan, based on close cooperation between industry, academia, and government. Through this,",
-  },
-  purposeList: {
-    ja: [
-      "科学技術イノベーションに貢献しうる優秀な人材の養成・確保",
-      "国際的頭脳循環の促進",
-      "日本と諸外国・地域の教育研究機関間の継続的連携・協力・交流",
-      "科学技術外交にも資する日本と諸外国・地域との友好関係の強化",
+// 国別参加者データ
+const countryData = [
+  { country: { ja: "インドネシア", en: "Indonesia" }, count: 15 },
+  { country: { ja: "ベトナム", en: "Vietnam" }, count: 15 },
+  { country: { ja: "マレーシア", en: "Malaysia" }, count: 10 },
+  { country: { ja: "ミャンマー", en: "Myanmar" }, count: 15 },
+  { country: { ja: "タイ", en: "Thailand" }, count: 10 },
+  { country: { ja: "カンボジア", en: "Cambodia" }, count: 5 },
+  { country: { ja: "フィリピン", en: "Philippines" }, count: 5 },
+  { country: { ja: "ラオス", en: "Laos" }, count: 5 },
+]
+
+// さくらサイエンスページの翻訳
+const sakuraTranslations = {
+  ja: {
+    title: "さくらサイエンス",
+    description:
+      "さくらサイエンスプラン（日本・アジア青少年サイエンス交流事業）は、アジア諸国の優秀な青少年を日本に招き、日本の先端科学技術を体験してもらうことで、アジアと日本の科学技術の発展に貢献することを目的とした事業です。",
+    timeline: "これまでの実施",
+    participantsByCountry: "国別参加者数",
+    total: "合計",
+    people: "名",
+    activitiesTitle: "活動内容",
+    activities: [
+      "最先端の研究施設・大学訪問",
+      "日本の研究者・学生との交流",
+      "科学技術に関する講義・実習",
+      "日本文化体験",
+      "産業施設見学",
     ],
-    en: [
-      "Development and securing of excellent human resources who can contribute to science and technology innovation",
-      "Promotion of international brain circulation",
-      "Continuous cooperation and exchange between educational and research institutions in Japan and various countries/regions",
-      "Strengthening friendly relations between Japan and various countries/regions, which also contributes to science and technology diplomacy",
+    learnMore: "詳しく見る",
+  },
+  en: {
+    title: "Sakura Science",
+    description:
+      "The Sakura Science Plan (Japan-Asia Youth Science Exchange Program) is a program aimed at contributing to the development of science and technology in Asia and Japan by inviting outstanding young people from Asian countries to Japan to experience Japan's advanced science and technology.",
+    timeline: "Past Programs",
+    participantsByCountry: "Participants by Country",
+    total: "Total",
+    people: "people",
+    activitiesTitle: "Activities",
+    activities: [
+      "Visits to cutting-edge research facilities and universities",
+      "Exchange with Japanese researchers and students",
+      "Lectures and practical training on science and technology",
+      "Japanese cultural experiences",
+      "Industrial facility tours",
     ],
-  },
-  purposeDescription2: {
-    ja: "に貢献し、ひいては、日本及び世界の科学技術・イノベーションの発展に寄与することを目的とします。",
-    en: "it aims to contribute to the development of science, technology, and innovation in Japan and the world.",
-  },
-  detailsButton: {
-    ja: "詳細はこちら",
-    en: "More Details",
-  },
-  yearsTitle: {
-    ja: "参加年度",
-    en: "Participation Years",
-  },
-  programSuffix: {
-    ja: "さくらサイエンスプログラム",
-    en: "Sakura Science Program",
-  },
-  viewDetails: {
-    ja: "詳細を見る",
-    en: "View Details",
-  },
-  labActivitiesTitle: {
-    ja: "研究室での活動内容",
-    en: "Laboratory Activities",
-  },
-  labActivitiesDescription1: {
-    ja: "当研究室では、さくらサイエンスプログラムを通じて、主にアジア地域からの若手研究者や学生を受け入れ、画像処理技術やAIを活用した研究活動を共同で行っています。参加者は最先端の研究設備を使用した実験や、研究室メンバーとの交流を通じて、日本の科学技術や研究文化に触れる機会を得ています。",
-    en: "Through the Sakura Science Program, our laboratory accepts young researchers and students mainly from the Asian region and conducts joint research activities utilizing image processing technology and AI. Participants have the opportunity to experience Japanese science, technology, and research culture through experiments using cutting-edge research facilities and interactions with laboratory members.",
-  },
-  labActivitiesDescription2: {
-    ja: "また、プログラム期間中には、研究活動だけでなく、日本文化体験や地域交流活動も行い、総合的な国際交流を促進しています。これらの活動を通じて、参加者と研究室メンバーの間に長期的な協力関係が構築され、国際共同研究や人材交流の基盤となっています。",
-    en: "In addition to research activities, the program also includes Japanese cultural experiences and local exchange activities, promoting comprehensive international exchange. Through these activities, long-term cooperative relationships are established between participants and laboratory members, forming the foundation for international joint research and personnel exchange.",
+    learnMore: "Learn More",
   },
 }
 
 export default function SakuraSciencePage() {
-  // 言語コンテキストを使用
-  const { language } = useLanguage()
+  const language: "ja" | "en" = "ja"
+  const t = sakuraTranslations[language]
+
+  const totalParticipants = countryData.reduce((sum, country) => sum + country.count, 0)
 
   return (
-    <div>
+    <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white">
       {/* ヘッダーセクション */}
-      <section className="bg-gray-100 py-16">
-        <div className="container">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">{translations.pageTitle[language]}</h1>
-            <p className="text-xl text-gray-600">{translations.pageSubtitle[language]}</p>
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-pink-100/50 to-purple-100/50" />
+        </div>
+        <div className="container relative z-10">
+          <div className="text-center max-w-4xl mx-auto">
+            {/* ロゴ */}
+            <div className="mb-8">
+              <Image
+                src={getImagePath("/images/sakura_logo.png")}
+                alt="Sakura Science Logo"
+                width={200}
+                height={80}
+                className="mx-auto"
+              />
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
+              {t.title}
+            </h1>
+            <p className="text-lg text-gray-700 leading-relaxed">{t.description}</p>
           </div>
         </div>
       </section>
 
-      {/* メインコンテンツ */}
+      {/* タイムラインセクション */}
       <section className="py-16">
         <div className="container">
-          <div className="max-w-4xl mx-auto">
-            <div className="space-y-8">
-              <div>
-                <h2 className="text-2xl font-bold mb-4">{translations.aboutTitle[language]}</h2>
-                <p className="text-gray-700">{translations.aboutDescription[language]}</p>
+          <h2 className="text-3xl font-bold text-center mb-12">{t.timeline}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {sakuraYears.map((yearData, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
+              >
+                <div className="relative h-48">
+                  <Image
+                    src={yearData.image}
+                    alt={`Sakura Science ${yearData.year[language]}`}
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute top-4 left-4 bg-pink-600 text-white px-4 py-2 rounded-full font-bold">
+                    {yearData.year[language]}
+                  </div>
+                </div>
+                {yearData.description && (
+                  <div className="p-6">
+                    <p className="text-gray-700">{yearData.description[language]}</p>
+                  </div>
+                )}
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-              <div className="relative h-[400px] mb-8 rounded-lg overflow-hidden">
+      {/* 国別参加者統計 */}
+      <section className="py-16 bg-gray-50">
+        <div className="container">
+          <h2 className="text-3xl font-bold text-center mb-12">{t.participantsByCountry}</h2>
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white rounded-xl shadow-lg p-8">
+              {/* 地図画像 */}
+              <div className="mb-8">
                 <Image
-                  src="/images/sakura_map.png"
-                  alt={translations.pageTitle[language]}
-                  fill
-                  className="object-contain"
+                  src={getImagePath("/images/sakura_map.png")}
+                  alt="Participant Countries Map"
+                  width={800}
+                  height={400}
+                  className="w-full rounded-lg"
                 />
               </div>
-
-              <div>
-                <h2 className="text-2xl font-bold mb-4">{translations.purposeTitle[language]}</h2>
-                <p className="text-gray-700">{translations.purposeDescription1[language]}</p>
-                <ul className="list-disc pl-5 space-y-2 mt-4 text-gray-700">
-                  {translations.purposeList[language].map((item, index) => (
-                    <li key={index}>{item}</li>
-                  ))}
-                </ul>
-                <p className="text-gray-700 mt-4">{translations.purposeDescription2[language]}</p>
+              
+              {/* 国別リスト */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                {countryData.map((data, index) => (
+                  <div
+                    key={index}
+                    className="text-center p-4 bg-gradient-to-br from-pink-50 to-purple-50 rounded-lg"
+                  >
+                    <div className="text-2xl font-bold text-pink-600">{data.count}</div>
+                    <div className="text-sm text-gray-700">{data.country[language]}</div>
+                  </div>
+                ))}
               </div>
-
-              <div className="flex justify-center">
-                <Link href="https://ssp.jst.go.jp/" target="_blank">
-                  <Button>{translations.detailsButton[language]}</Button>
-                </Link>
-              </div>
-
-              <hr className="border-t border-gray-200 my-8" />
-
-              <div>
-                <h2 className="text-2xl font-bold mb-6">{translations.yearsTitle[language]}</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {sakuraYears.map((year, index) => (
-                    <div key={index} className="overflow-hidden bg-white shadow-sm">
-                      <div className="relative h-48">
-                        <Image
-                          src={year.image || "/placeholder.svg"}
-                          alt={year.year[language]}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                      <div className="p-4">
-                        <h3 className="text-lg font-bold text-center">
-                          {year.year[language]} {translations.programSuffix[language]}
-                        </h3>
-                        {year.description && (
-                          <p className="mt-2 text-sm text-gray-600 text-center">{year.description[language]}</p>
-                        )}
-                        {year.link && (
-                          <div className="mt-4 text-center">
-                            <Link href={year.link}>
-                              <Button variant="outline" size="sm">
-                                {translations.viewDetails[language]}
-                              </Button>
-                            </Link>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  ))}
+              
+              {/* 合計 */}
+              <div className="text-center p-6 bg-gradient-to-r from-pink-600 to-purple-600 text-white rounded-lg">
+                <div className="text-4xl font-bold mb-2">{totalParticipants}</div>
+                <div className="text-lg">
+                  {t.total} {t.people}
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-              <hr className="border-t border-gray-200 my-8" />
-
-              <div>
-                <h2 className="text-2xl font-bold mb-4">{translations.labActivitiesTitle[language]}</h2>
-                <p className="text-gray-700">{translations.labActivitiesDescription1[language]}</p>
-                <p className="text-gray-700 mt-4">{translations.labActivitiesDescription2[language]}</p>
-              </div>
+      {/* 活動内容 */}
+      <section className="py-16">
+        <div className="container">
+          <h2 className="text-3xl font-bold text-center mb-12">{t.activitiesTitle}</h2>
+          <div className="max-w-3xl mx-auto">
+            <div className="bg-white rounded-xl shadow-lg p-8">
+              <ul className="space-y-4">
+                {t.activities.map((activity, index) => (
+                  <li key={index} className="flex items-start">
+                    <span className="flex-shrink-0 w-8 h-8 bg-pink-100 text-pink-600 rounded-full flex items-center justify-center font-bold mr-4">
+                      {index + 1}
+                    </span>
+                    <span className="text-gray-700">{activity}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>

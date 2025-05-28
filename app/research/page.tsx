@@ -1,10 +1,8 @@
-"use client"
-
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { useLanguage } from "@/contexts/language-context"
 import { researchTranslations } from "@/translations/research"
+import { getImagePath } from "@/lib/utils"
 
 // 研究分野の型定義
 type ResearchArea = {
@@ -16,7 +14,7 @@ type ResearchArea = {
 }
 
 export default function ResearchPage() {
-  const { language } = useLanguage()
+  const language = "ja"
   const t = researchTranslations[language]
 
   // 研究分野データ
@@ -25,21 +23,21 @@ export default function ResearchPage() {
       id: language === "ja" ? "医療" : "Medical",
       title: t.medicalField.title,
       description: t.medicalField.description,
-      image: "/images/research_medical.png",
+      image: getImagePath("/images/research_medical.png"),
       link: "/research/projects", // 直接プロジェクトページに向ける
     },
     {
       id: language === "ja" ? "牛" : "Cattle",
       title: t.agricultureField.title,
       description: t.agricultureField.description,
-      image: "/images/research_cow.jpg",
+      image: getImagePath("/images/research_cow.jpg"),
       link: "/research/projects", // 直接プロジェクトページに向ける
     },
     {
       id: language === "ja" ? "人" : "Human",
       title: t.elderlyField.title,
       description: t.elderlyField.description,
-      image: "/images/research_oldmen.png", // 画像を更新
+      image: getImagePath("/images/research_oldmen.png"), // 画像を更新
       link: "/research/projects", // 直接プロジェクトページに向ける
     },
   ]
@@ -51,10 +49,10 @@ export default function ResearchPage() {
         <div className="py-16">
           {/* Research タイトル */}
           <div className="text-center mb-16">
-            <div className="relative w-full max-w-xs mx-auto h-20 mb-2">
-              <Image src="/images/research.png" alt="Research" fill className="object-contain" priority />
+            <div className="relative w-full max-w-md mx-auto h-16 mb-4">
+              <Image src={getImagePath("/images/logo_research.png")} alt="Research" fill className="object-contain" priority />
             </div>
-            <p className="text-xl">{t.subtitle}</p>
+            <p className="text-lg">{t.subtitle}</p>
           </div>
 
           <div className="container">

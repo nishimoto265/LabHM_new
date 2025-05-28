@@ -1,7 +1,67 @@
+// 個別プロジェクトページ用の翻訳
+export const cattleIdentificationTranslations = {
+  ja: {
+    title: "3Dカメラによる歩行中の牛の個体識別",
+    overviewTitle: "研究概要",
+    overviewText: "距離情報を活用して牛の3次元形状を捉え、毛色や模様に依存しない高精度な個体識別システムを構築する研究です。",
+    backgroundTitle: "実験背景・目的",
+    backgroundText1: "畜産業において、個体識別は健康管理や生産性向上のために不可欠です。従来の方法では人的コストが高く、識別精度にも課題がありました。",
+    backgroundText2: "本研究では3Dカメラを用いて、歩行中の牛でも高精度に個体識別できるシステムの開発を目指しています。",
+    environmentTitle: "実験環境",
+    environmentText1: "宮崎大学農学部附属フィールド科学教育研究センターの牛舎にて実験を実施しています。",
+    environmentText2: "3Dカメラを通路上部に設置し、歩行中の牛の3次元データを取得します。",
+    methodTitle: "提案手法",
+    methodText1: "本研究では、以下の手順で個体識別を行います：",
+    methodText2: "",
+    methodList: [
+      "3Dカメラで牛の3次元点群データを取得",
+      "点群データから特徴量を抽出",
+      "機械学習により個体を識別",
+      "識別結果をデータベースに記録"
+    ],
+    resultsTitle: "実験結果",
+    resultsText1: "提案手法により、20頭の牛に対して95%以上の識別精度を達成しました。",
+    resultsText2: "毛色や模様に依存しない識別が可能となり、様々な品種の牛に適用可能です。",
+    futureTitle: "今後の展望",
+    futureText1: "識別精度のさらなる向上を目指し、深層学習モデルの最適化を進めています。",
+    futureText2: "また、リアルタイムでの個体識別システムの実装を計画しています。",
+    futureText3: "将来的には、識別結果を活用した健康管理システムとの連携を目指します。",
+    backToProjects: "プロジェクト一覧に戻る"
+  },
+  en: {
+    title: "Individual Identification of Walking Cattle Using 3D Cameras",
+    overviewTitle: "Research Overview",
+    overviewText: "Research building a high-precision individual identification system that captures the three-dimensional shape of cattle using distance information, independent of coat color or pattern.",
+    backgroundTitle: "Background & Objectives",
+    backgroundText1: "In the livestock industry, individual identification is essential for health management and productivity improvement. Traditional methods have high labor costs and challenges in identification accuracy.",
+    backgroundText2: "This research aims to develop a system that can accurately identify individual cattle even while walking using 3D cameras.",
+    environmentTitle: "Experimental Environment",
+    environmentText1: "Experiments are conducted at the Field Science Education and Research Center of the Faculty of Agriculture, University of Miyazaki.",
+    environmentText2: "3D cameras are installed above the passage to acquire three-dimensional data of walking cattle.",
+    methodTitle: "Proposed Method",
+    methodText1: "In this research, individual identification is performed through the following steps:",
+    methodText2: "",
+    methodList: [
+      "Acquire 3D point cloud data of cattle with 3D camera",
+      "Extract features from point cloud data",
+      "Identify individuals using machine learning",
+      "Record identification results in database"
+    ],
+    resultsTitle: "Experimental Results",
+    resultsText1: "The proposed method achieved an identification accuracy of over 95% for 20 cattle.",
+    resultsText2: "Identification independent of coat color or pattern is possible, making it applicable to various breeds of cattle.",
+    futureTitle: "Future Prospects",
+    futureText1: "We are working on optimizing deep learning models to further improve identification accuracy.",
+    futureText2: "We also plan to implement a real-time individual identification system.",
+    futureText3: "In the future, we aim to integrate with health management systems utilizing identification results.",
+    backToProjects: "Back to Projects"
+  }
+}
+
 export const researchProjectsTranslations = {
   ja: {
     title: "研究プロジェクト",
-    subtitle: "画像処理とAIを活用した社会課題解決の取り組み",
+    subtitle: "プロジェクト一覧",
     keywords: {
       all: "すべて",
       ai: "AI",
@@ -54,7 +114,7 @@ export const researchProjectsTranslations = {
   },
   en: {
     title: "Research Projects",
-    subtitle: "Addressing Social Challenges through Image Processing and AI",
+    subtitle: "Project List",
     keywords: {
       all: "All",
       ai: "AI",

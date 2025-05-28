@@ -22,6 +22,13 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  // 静的エクスポート用の設定（STATIC_EXPORT環境変数がtrueの時のみ適用）
+  ...(process.env.STATIC_EXPORT === 'true' && {
+    output: 'export',
+    trailingSlash: true,
+    basePath: '/imagelab',
+    assetPrefix: '/imagelab',
+  }),
   experimental: {
     webpackBuildWorker: true,
     parallelServerBuildTraces: true,

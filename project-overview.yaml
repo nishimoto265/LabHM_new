@@ -1,0 +1,52 @@
+project_name: "宮崎大学 情報処理システム研究室 公式ウェブサイト Ver.2"
+description: "宮崎大学情報処理システム研究室の新しいウェブサイトのプロジェクトです。以前のバージョンはPHPとJavaScriptで構築されていましたが、本バージョンではよりモダンな技術スタックを採用しています。"
+technologies:
+  - Next.js 15 (React フレームワーク)
+  - TypeScript
+  - Tailwind CSS
+  - shadcn/ui
+  - Radix UI
+structure:
+  root_directories:
+    - app # Next.js App Router
+    - components # 再利用可能コンポーネント
+    - contexts # React Context (言語切り替え等)
+    - translations # 多言語対応ファイル
+    - lib # ユーティリティ関数
+    - public # 静的ファイル
+    - styles # スタイルファイル
+  app_subdirectories:
+    - about # 研究室についてページ
+    - achievements # 研究業績ページ
+    - activities # 活動ページ
+    - career # 進学・就職先ページ
+    - contact # お問い合わせページ
+    - international # 国際連携ページ
+    - members # メンバーページ
+    - news # ニュースページ
+    - publications # 出版物ページ
+    - research # 研究ページ
+    - search # 検索ページ
+    - students # 学生向けページ
+  core_files:
+    - app/layout.tsx # ルートレイアウト
+    - app/page.tsx # ホームページ
+    - components/layout/header.tsx
+    - components/layout/footer.tsx
+    - contexts/language-context.tsx
+main_features:
+  - "多言語対応 (日本語/英語)"
+  - "レスポンシブデザイン"
+  - "研究室の主要コンテンツ表示 (研究プロジェクト, メンバー, ニュース等)"
+  - "モダンUI/UX (ダークモード対応, アニメーション)"
+research_fields:
+  - "画像処理・コンピュータビジョン"
+  - "AI・機械学習"
+  - "医療情報処理（胎児モニタリング等）"
+  - "農業技術（牛の摂食行動解析等）"
+  - "高齢者支援システム"
+future_plans:
+  - "SQLデータベースを導入し、コンテンツの更新を容易にする予定"
+old_version:
+  repository: "https://github.com/nishimoto265/LabHM_old"
+  url: "https://www.cc.miyazaki-u.ac.jp/imagelab/home.php"

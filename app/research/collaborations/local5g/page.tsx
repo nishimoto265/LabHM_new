@@ -18,11 +18,21 @@ export default function Local5GProjectPage() {
   return (
     <div>
       {/* ヘッダーセクション */}
-      <section className="bg-gray-100 py-16">
-        <div className="container">
+      <section 
+        className="relative py-16 md:py-20 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: "url('/images/normal_header.png')"
+        }}
+      >
+        {/* オーバーレイ */}
+        <div className="absolute inset-0 bg-black/50"></div>
+        
+        {/* コンテンツ */}
+        <div className="container relative z-10">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">ローカル5Gを用いたスマート農業実証プロジェクト</h1>
-            <p className="text-xl text-gray-600">産学官連携による先進的な取り組み</p>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tighter text-white drop-shadow-lg">
+              ローカル5Gを用いたスマート農業実証プロジェクト
+            </h1>
           </div>
         </div>
       </section>
@@ -68,9 +78,9 @@ export default function Local5GProjectPage() {
                 <p className="text-gray-700 pb-4 border-b border-gray-200">
                   本実証実験は、「誰一人取り残さない」というSDGsの基本理念に基づき、以下の持続可能な開発目標に関連する取り組みを行います。
                 </p>
-                <div className="flex flex-row justify-center gap-4 mt-6 overflow-x-auto">
+                <div className="flex flex-row flex-wrap justify-around gap-4 mt-6">
                   {relatedSDGs.map((sdgNumber) => (
-                    <div key={sdgNumber} className="flex flex-col items-center flex-shrink-0">
+                    <div key={sdgNumber} className="flex flex-col items-center flex-shrink-0 w-28 mb-4">
                       <div className="relative w-24 h-24 mb-3">
                         <Image
                           src={sdgsIcons[sdgNumber].path || "/placeholder.svg"}
@@ -79,7 +89,7 @@ export default function Local5GProjectPage() {
                           className="object-contain"
                         />
                       </div>
-                      <p className="text-sm text-center">{sdgsIcons[sdgNumber].name}</p>
+                      <p className="text-sm text-center h-10 flex items-center justify-center">{sdgsIcons[sdgNumber].name}</p>
                     </div>
                   ))}
                 </div>

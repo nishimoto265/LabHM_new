@@ -5,11 +5,12 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 // Lucide Reactからインポートするアイコンを追加
 import { Search, ChevronDown, Menu, X } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
+import { getImagePath } from "@/lib/utils"
 
 // useState部分を更新して、メニューの開閉状態を管理
 const Header = () => {
@@ -17,6 +18,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const pathname = usePathname()
+  const router = useRouter()
   const { language, setLanguage } = useLanguage()
 
   // 2. 検索処理を行う関数を追加
@@ -31,6 +33,22 @@ const Header = () => {
   // 言語切り替え処理
   const toggleLanguage = () => {
     setLanguage(language === "ja" ? "en" : "ja")
+  }
+
+  // ハッシュリンクのナビゲーション処理
+  const handleHashNavigation = (e: React.MouseEvent, hash: string) => {
+    e.preventDefault()
+    if (pathname.endsWith("/members")) {
+      // 既にmembersページにいる場合は、直接ハッシュに移動
+      window.location.hash = hash
+      const element = document.querySelector(hash)
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" })
+      }
+    } else {
+      // 他のページからの場合は、ページ遷移してからハッシュに移動
+      router.push(`/members${hash}`)
+    }
   }
 
   useEffect(() => {
@@ -85,7 +103,7 @@ const Header = () => {
     <header className={cn("sticky top-0 z-50 w-full transition-all duration-300 bg-white", isScrolled && "shadow-sm")}>
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center space-x-2">
-          <Image src="/logo.png" alt="THITHILAB" width={180} height={40} className="h-10 w-auto" />
+          <Image src={getImagePath("/logo.png")} alt="ロゴ" width={180} height={180} className="object-contain" />
         </Link>
 
         {/* デスクトップナビゲーション */}
@@ -145,45 +163,27 @@ const Header = () => {
               {currentMenu.members} <ChevronDown className="h-4 w-4 ml-1" />
             </div>
             <div className="absolute left-0 top-full w-48 bg-white shadow-md rounded-b-md overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-              <Link
+              <a
                 href="/members#faculty"
                 className="block px-4 py-2 text-sm hover:bg-gray-100"
-                onClick={(e) => {
-                  // クライアントサイドナビゲーションでハッシュが変わらない問題に対処
-                  if (pathname === "/members") {
-                    e.preventDefault()
-                    window.location.hash = "faculty"
-                  }
-                }}
+                onClick={(e) => handleHashNavigation(e, "#faculty")}
               >
                 {currentMenu.faculty}
-              </Link>
-              <Link
+              </a>
+              <a
                 href="/members#students"
                 className="block px-4 py-2 text-sm hover:bg-gray-100"
-                onClick={(e) => {
-                  // クライアントサイドナビゲーションでハッシュが変わらない問題に対処
-                  if (pathname === "/members") {
-                    e.preventDefault()
-                    window.location.hash = "students"
-                  }
-                }}
+                onClick={(e) => handleHashNavigation(e, "#students")}
               >
                 {currentMenu.students}
-              </Link>
-              <Link
+              </a>
+              <a
                 href="/members#alumni"
                 className="block px-4 py-2 text-sm hover:bg-gray-100"
-                onClick={(e) => {
-                  // クライアントサイドナビゲーションでハッシュが変わらない問題に対処
-                  if (pathname === "/members") {
-                    e.preventDefault()
-                    window.location.hash = "alumni"
-                  }
-                }}
+                onClick={(e) => handleHashNavigation(e, "#alumni")}
               >
                 {currentMenu.alumni}
-              </Link>
+              </a>
             </div>
           </div>
 
@@ -195,8 +195,8 @@ const Header = () => {
           </Link>
 
           <Link
-            href="/students"
-            className={cn("px-3 py-2 text-sm hover:text-primary", pathname === "/students" && "text-primary")}
+            href="/career"
+            className={cn("px-3 py-2 text-sm hover:text-primary", pathname === "/career" && "text-primary")}
           >
             {currentMenu.career}
           </Link>
@@ -310,15 +310,36 @@ const Header = () => {
                 <span>{currentMenu.members}</span>
               </div>
               <div className="pr-4 mt-2 space-y-2 text-right">
-                <Link href="/members#faculty" className="block py-1 text-sm" onClick={() => setIsMenuOpen(false)}>
+                <a 
+                  href="/members#faculty" 
+                  className="block py-1 text-sm" 
+                  onClick={(e) => {
+                    handleHashNavigation(e, "#faculty")
+                    setIsMenuOpen(false)
+                  }}
+                >
                   {currentMenu.faculty}
-                </Link>
-                <Link href="/members#students" className="block py-1 text-sm" onClick={() => setIsMenuOpen(false)}>
+                </a>
+                <a 
+                  href="/members#students" 
+                  className="block py-1 text-sm" 
+                  onClick={(e) => {
+                    handleHashNavigation(e, "#students")
+                    setIsMenuOpen(false)
+                  }}
+                >
                   {currentMenu.students}
-                </Link>
-                <Link href="/members#alumni" className="block py-1 text-sm" onClick={() => setIsMenuOpen(false)}>
+                </a>
+                <a 
+                  href="/members#alumni" 
+                  className="block py-1 text-sm" 
+                  onClick={(e) => {
+                    handleHashNavigation(e, "#alumni")
+                    setIsMenuOpen(false)
+                  }}
+                >
                   {currentMenu.alumni}
-                </Link>
+                </a>
               </div>
             </div>
 
@@ -331,8 +352,8 @@ const Header = () => {
             </Link>
 
             <Link
-              href="/students"
-              className={cn("px-3 py-3 text-sm border-b text-right", pathname === "/students" && "text-primary")}
+              href="/career"
+              className={cn("px-3 py-3 text-sm border-b text-right", pathname === "/career" && "text-primary")}
               onClick={() => setIsMenuOpen(false)}
             >
               {currentMenu.career}

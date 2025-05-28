@@ -1,24 +1,32 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { useLanguage } from "@/contexts/language-context"
 import { homeTranslations } from "@/translations/home"
+import { newsData } from "@/translations/news-data"
+import { getTagBgColor } from "@/lib/news-utils"
+import { getImagePath } from "@/lib/utils"
 
 export default function Home() {
   const { language } = useLanguage()
   const t = homeTranslations[language]
+  const news = newsData[language]
+  
+  // 最新の4件のニュースを取得
+  const latestNews = news.slice(0, 4)
 
   return (
     <div>
       {/* ヒーローセクション */}
       <section className="relative h-[80vh]">
         <div className="absolute inset-0 z-0">
-          <Image src="/images/hero-owl.jpeg" alt="フクロウ" fill priority className="object-cover" />
+          <Image src={getImagePath("/images/hero-owl.jpeg")} alt="フクロウ" fill priority className="object-cover object-right" />
           <div className="absolute inset-0 bg-black/30"></div>
         </div>
         <div className="relative z-10 container h-full flex flex-col justify-center text-white">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">{t.heroTitle}</h1>
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 whitespace-pre-line">{t.heroTitle}</h1>
           <p className="text-lg md:text-xl max-w-2xl whitespace-pre-line">{t.heroDescription}</p>
         </div>
       </section>
@@ -30,84 +38,96 @@ export default function Home() {
             News <span className="ml-4 text-lg font-normal">{t.news}</span>
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="group">
-              <div className="relative">
-                <div className="absolute top-0 left-0 bg-yellow-600 text-white text-xs px-2 py-1 z-10">
-                  {t.categories.announcement}
-                </div>
-                <div className="absolute top-0 right-0 bg-white text-gray-800 text-xs px-2 py-1 z-10">2025.02.21</div>
-                <div className="relative h-48 overflow-hidden">
-                  <Image
-                    src="/placeholder.svg?height=300&width=400"
-                    alt="ニュース画像"
-                    fill
-                    className="object-contain transition-transform group-hover:scale-105 bg-white p-4"
-                  />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {latestNews.map((newsItem) => (
+              <div key={newsItem.id} className={newsItem.link ? "group" : ""}>
+                <div className="overflow-hidden h-full bg-white border-b border-gray-200">
+                  <div className={`relative h-48 overflow-hidden ${newsItem.image && newsItem.image.trim() !== "" ? '' : 'bg-gray-50 flex items-center justify-center'}`}>
+                    {newsItem.link ? (
+                      newsItem.isExternal ? (
+                        <a 
+                          href={newsItem.link} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="block w-full h-full"
+                        >
+                          <Image
+                            src={newsItem.image && newsItem.image.trim() !== "" ? getImagePath(newsItem.image) : getImagePath("/logo.png")}
+                            alt={newsItem.title}
+                            fill
+                            className={`${(newsItem.image && newsItem.image.trim() !== "") ? 'object-cover' : 'object-contain p-4'} transition-transform group-hover:scale-105`}
+                          />
+                        </a>
+                      ) : (
+                        <Link 
+                          href={newsItem.link} 
+                          className="block w-full h-full"
+                        >
+                          <Image
+                            src={newsItem.image && newsItem.image.trim() !== "" ? getImagePath(newsItem.image) : getImagePath("/logo.png")}
+                            alt={newsItem.title}
+                            fill
+                            className={`${(newsItem.image && newsItem.image.trim() !== "") ? 'object-cover' : 'object-contain p-4'} transition-transform group-hover:scale-105`}
+                          />
+                        </Link>
+                      )
+                    ) : (
+                      <Image
+                        src={newsItem.image && newsItem.image.trim() !== "" ? getImagePath(newsItem.image) : getImagePath("/logo.png")}
+                        alt={newsItem.title}
+                        fill
+                        className={`${(newsItem.image && newsItem.image.trim() !== "") ? 'object-cover' : 'object-contain p-4'}`}
+                      />
+                    )}
+                    <div
+                      className={`absolute top-2 left-2 ${getTagBgColor(newsItem.tag)} text-white text-xs px-2 py-1 rounded pointer-events-none`}
+                    >
+                      {newsItem.tag}
+                    </div>
+                    <div className="absolute top-2 right-2 bg-white text-gray-800 text-xs px-2 py-1 rounded pointer-events-none">
+                      {newsItem.date}
+                    </div>
+                  </div>
+                  <div className="p-4">
+                    {newsItem.link ? (
+                      newsItem.isExternal ? (
+                        <a 
+                          href={newsItem.link} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="font-medium group-hover:text-primary transition-colors block"
+                        >
+                          <h3 className="line-clamp-2 font-medium">
+                            {newsItem.title}
+                          </h3>
+                        </a>
+                      ) : (
+                        <Link 
+                          href={newsItem.link} 
+                          className="font-medium group-hover:text-primary transition-colors block"
+                        >
+                          <h3 className="line-clamp-2 font-medium">
+                            {newsItem.title}
+                          </h3>
+                        </Link>
+                      )
+                    ) : (
+                      <h3 className="line-clamp-2 font-medium">
+                        {newsItem.title}
+                      </h3>
+                    )}
+                  </div>
                 </div>
               </div>
-              <h3 className="mt-2 font-medium">SAKURA Science Project FareWell Partyが開催されました</h3>
-            </div>
-
-            <div className="group">
-              <div className="relative">
-                <div className="absolute top-0 left-0 bg-green-600 text-white text-xs px-2 py-1 z-10">
-                  {t.categories.research}
-                </div>
-                <div className="absolute top-0 right-0 bg-white text-gray-800 text-xs px-2 py-1 z-10">2025.01.09</div>
-                <div className="relative h-48 overflow-hidden">
-                  <Image
-                    src="/placeholder.svg?height=300&width=400"
-                    alt="ニュース画像"
-                    fill
-                    className="object-contain transition-transform group-hover:scale-105 bg-white p-4"
-                  />
-                </div>
-              </div>
-              <h3 className="mt-2 font-medium">PSUに行ってきました。楽しかった！</h3>
-            </div>
-
-            <div className="group">
-              <div className="relative">
-                <div className="absolute top-0 left-0 bg-blue-600 text-white text-xs px-2 py-1 z-10">
-                  {t.categories.lecture}
-                </div>
-                <div className="absolute top-0 right-0 bg-white text-gray-800 text-xs px-2 py-1 z-10">2024.09.28</div>
-                <div className="relative h-48 overflow-hidden">
-                  <Image
-                    src="/placeholder.svg?height=300&width=400"
-                    alt="ニュース画像"
-                    fill
-                    className="object-contain transition-transform group-hover:scale-105 bg-white p-4"
-                  />
-                </div>
-              </div>
-              <h3 className="mt-2 font-medium">ホクレン新千歳牧場ー武井さんありがとうございます！</h3>
-            </div>
-
-            <div className="group">
-              <div className="relative">
-                <div className="absolute top-0 left-0 bg-red-600 text-white text-xs px-2 py-1 z-10">
-                  {t.categories.activity}
-                </div>
-                <div className="absolute top-0 right-0 bg-white text-gray-800 text-xs px-2 py-1 z-10">2024.07.30</div>
-                <div className="relative h-48 overflow-hidden">
-                  <Image
-                    src="/placeholder.svg?height=300&width=400"
-                    alt="ニュース画像"
-                    fill
-                    className="object-contain transition-transform group-hover:scale-105 bg-white p-4"
-                  />
-                </div>
-              </div>
-              <h3 className="mt-2 font-medium">卒業式なり！おめでとう！</h3>
-            </div>
+            ))}
           </div>
 
           <div className="mt-8 text-center">
-            <Button variant="outline" className="bg-gray-700 text-white hover:bg-gray-800">
-              View More
-            </Button>
+            <Link href="/news">
+              <Button variant="outline" className="bg-gray-700 text-white hover:bg-gray-800">
+                View More
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -119,80 +139,98 @@ export default function Home() {
             Research <span className="ml-4 text-lg font-normal">{t.research}</span>
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="group">
-              <div className="relative">
-                <div className="absolute top-0 left-0 bg-green-700 text-white text-xs px-2 py-1 z-10">
-                  {t.researchCategories.cow}
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Link href={`/research/projects?category=${encodeURIComponent(language === "ja" ? "牛" : "Cattle")}`} className="group">
+              <div className="overflow-hidden h-full bg-white">
                 <div className="relative h-48 overflow-hidden">
                   <Image
-                    src="/logo.png"
-                    alt="研究画像"
+                    src={getImagePath("/logo.png")}
+                    alt={t.researchProjects.cowFeeding}
                     fill
-                    className="object-contain transition-transform group-hover:scale-105 bg-white p-4"
+                    className="object-contain p-4 transition-transform group-hover:scale-105 bg-white"
                   />
+                  <div className="absolute top-2 left-2 bg-green-700 text-white text-xs px-2 py-1 rounded z-10">
+                    {t.researchCategories.cow}
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="mt-2 font-medium group-hover:text-primary transition-colors">
+                    {t.researchProjects.cowFeeding}
+                  </h3>
                 </div>
               </div>
-              <h3 className="mt-2 font-medium">{t.researchProjects.cowFeeding}</h3>
-            </div>
+            </Link>
 
-            <div className="group">
-              <div className="relative">
-                <div className="absolute top-0 left-0 bg-blue-700 text-white text-xs px-2 py-1 z-10">
-                  {t.researchCategories.human}
-                </div>
+            <Link href={`/research/projects?category=${encodeURIComponent(language === "ja" ? "人" : "Human")}`} className="group">
+              <div className="overflow-hidden h-full bg-white">
                 <div className="relative h-48 overflow-hidden">
                   <Image
-                    src="/logo.png"
-                    alt="研究画像"
+                    src={getImagePath("/logo.png")}
+                    alt={t.researchProjects.elderlyMonitoring}
                     fill
-                    className="object-contain transition-transform group-hover:scale-105 bg-white p-4"
+                    className="object-contain p-4 transition-transform group-hover:scale-105 bg-white"
                   />
+                  <div className="absolute top-2 left-2 bg-blue-700 text-white text-xs px-2 py-1 rounded z-10">
+                    {t.researchCategories.human}
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="mt-2 font-medium group-hover:text-primary transition-colors">
+                    {t.researchProjects.elderlyMonitoring}
+                  </h3>
                 </div>
               </div>
-              <h3 className="mt-2 font-medium">{t.researchProjects.elderlyMonitoring}</h3>
-            </div>
+            </Link>
 
-            <div className="group">
-              <div className="relative">
-                <div className="absolute top-0 left-0 bg-red-700 text-white text-xs px-2 py-1 z-10">
-                  {t.researchCategories.medical}
-                </div>
+            <Link href={`/research/projects?category=${encodeURIComponent(language === "ja" ? "医療" : "Medical")}`} className="group">
+              <div className="overflow-hidden h-full bg-white">
                 <div className="relative h-48 overflow-hidden">
                   <Image
-                    src="/logo.png"
-                    alt="研究画像"
+                    src={getImagePath("/logo.png")}
+                    alt={t.researchProjects.fetalMonitoring}
                     fill
-                    className="object-contain transition-transform group-hover:scale-105 bg-white p-4"
+                    className="object-contain p-4 transition-transform group-hover:scale-105 bg-white"
                   />
+                  <div className="absolute top-2 left-2 bg-red-700 text-white text-xs px-2 py-1 rounded z-10">
+                    {t.researchCategories.medical}
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="mt-2 font-medium group-hover:text-primary transition-colors">
+                    {t.researchProjects.fetalMonitoring}
+                  </h3>
                 </div>
               </div>
-              <h3 className="mt-2 font-medium">{t.researchProjects.fetalMonitoring}</h3>
-            </div>
+            </Link>
 
-            <div className="group">
-              <div className="relative">
-                <div className="absolute top-0 left-0 bg-gray-700 text-white text-xs px-2 py-1 z-10">
-                  {t.researchCategories.other}
-                </div>
+            <Link href="/research/projects" className="group">
+              <div className="overflow-hidden h-full bg-white">
                 <div className="relative h-48 overflow-hidden">
                   <Image
-                    src="/logo.png"
-                    alt="研究画像"
+                    src={getImagePath("/logo.png")}
+                    alt={t.researchProjects.waterQuality}
                     fill
-                    className="object-contain transition-transform group-hover:scale-105 bg-white p-4"
+                    className="object-contain p-4 transition-transform group-hover:scale-105 bg-white"
                   />
+                  <div className="absolute top-2 left-2 bg-gray-700 text-white text-xs px-2 py-1 rounded z-10">
+                    {t.researchCategories.other}
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="mt-2 font-medium group-hover:text-primary transition-colors">
+                    {t.researchProjects.waterQuality}
+                  </h3>
                 </div>
               </div>
-              <h3 className="mt-2 font-medium">{t.researchProjects.waterQuality}</h3>
-            </div>
+            </Link>
           </div>
 
           <div className="mt-8 text-center">
-            <Button variant="outline" className="bg-gray-700 text-white hover:bg-gray-800">
-              View More
-            </Button>
+            <Link href="/research/projects">
+              <Button variant="outline" className="bg-gray-700 text-white hover:bg-gray-800">
+                View More
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -207,7 +245,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row gap-8">
             <div className="md:w-1/3">
               <div className="relative aspect-square">
-                <Image src="/images/thithizin.jpg" alt="教授" fill className="object-cover" />
+                <Image src={getImagePath("/images/thithizin.jpg")} alt="教授" fill className="object-cover" />
               </div>
             </div>
             <div className="md:w-2/3">
@@ -219,7 +257,7 @@ export default function Home() {
               </div>
               <div className="mt-6 text-right">
                 <p>{t.professorTitle}</p>
-                <p className="text-2xl font-bold mt-1">{t.professorName}</p>
+                <p className="text-3xl font-caveat mt-2 text-gray-800 transform -rotate-1">{t.professorName}</p>
               </div>
             </div>
           </div>

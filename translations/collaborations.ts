@@ -1,7 +1,7 @@
 export const collaborationsTranslations = {
   ja: {
     title: "共同研究",
-    subtitle: "産学官連携による研究プロジェクト",
+    subtitle: "共同研究",
     viewDetails: "詳細を見る",
     projects: {
       local5g: {
@@ -16,7 +16,7 @@ export const collaborationsTranslations = {
   },
   en: {
     title: "Collaborations",
-    subtitle: "Research Projects through Industry-Academia-Government Collaboration",
+    subtitle: "Collaborations",
     viewDetails: "View Details",
     projects: {
       local5g: {

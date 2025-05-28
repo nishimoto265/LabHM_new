@@ -7,11 +7,21 @@ export default function GovernmentProjectPage() {
   return (
     <div>
       {/* ヘッダーセクション */}
-      <section className="bg-gray-100 py-16">
-        <div className="container">
+      <section 
+        className="relative py-16 md:py-20 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: "url('/images/normal_header.png')"
+        }}
+      >
+        {/* オーバーレイ */}
+        <div className="absolute inset-0 bg-black/50"></div>
+        
+        {/* コンテンツ */}
+        <div className="container relative z-10">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">牛舎内で5Gを活用した作業効率化支援実証試験</h1>
-            <p className="text-xl text-gray-600">5Gで伝送した4K映像による耳標の読み取りと乳牛の見守り</p>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tighter text-white drop-shadow-lg">
+              牛舎内で5Gを活用した作業効率化支援実証試験
+            </h1>
           </div>
         </div>
       </section>

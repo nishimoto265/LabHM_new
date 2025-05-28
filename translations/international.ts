@@ -1,7 +1,7 @@
 export const internationalTranslations = {
   ja: {
     title: "国際連携",
-    subtitle: "グローバルな研究ネットワークの構築",
+    subtitle: "国際連携",
     introduction:
       "ThiThiZin研究室では、国際的な研究交流を積極的に推進し、グローバルな視点を持った研究者の育成に取り組んでいます。アジアを中心とした海外の大学・研究機関との連携を通じて、多様な文化的背景を持つ研究者との協働による新たな価値創造を目指しています。",
     programs: {
@@ -22,7 +22,7 @@ export const internationalTranslations = {
   },
   en: {
     title: "International Collaboration",
-    subtitle: "Building a Global Research Network",
+    subtitle: "International Collaboration",
     introduction:
       "The ThiThiZin Laboratory actively promotes international research exchanges and is committed to developing researchers with a global perspective. Through collaboration with overseas universities and research institutions, particularly in Asia, we aim to create new value through collaboration with researchers from diverse cultural backgrounds.",
     programs: {

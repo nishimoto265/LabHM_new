@@ -1,6 +1,6 @@
 export const homeTranslations = {
   ja: {
-    heroTitle: "NEW VALUE UNLOCKED BY THE DIGITAL EYE",
+    heroTitle: "NEW VALUE UNLOCKED\nBY THE DIGITAL EYE",
     heroDescription:
       "人の目で捉えられるものだけでなく、見過ごされがちな「見えない」情報さえも、画像解析の力で浮かび上がる。その膨大なデータの中に無限の可能性が秘められている。",
     viewMore: "詳しく見る",
@@ -31,12 +31,12 @@ export const homeTranslations = {
     researchProjects: {
       cowFeeding: "牛の摂食行動と摂食時間管理",
       elderlyMonitoring: "プライバシーを保護した高齢者見守りと健康支援システム",
-      fetalMonitoring: "情報技術とAIを用いた胎児血ガスパラメータ活用による負担軽減型胎児モニタリング",
+      fetalMonitoring: "情報技術とAIを用いた負担軽減型胎児モニタリング",
       waterQuality: "水の三要素を解析した3なぎざの水質管理システム",
     },
   },
   en: {
-    heroTitle: "NEW VALUE UNLOCKED BY THE DIGITAL EYE",
+    heroTitle: "NEW VALUE UNLOCKED\nBY THE DIGITAL EYE",
     heroDescription:
       "Not only what can be captured by the human eye, but even 'invisible' information that tends to be overlooked emerges through the power of image analysis. Infinite possibilities are hidden within this vast data.",
     viewMore: "View More",

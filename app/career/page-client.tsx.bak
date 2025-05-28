@@ -1,0 +1,216 @@
+"use client"
+
+import Image from "next/image"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { useLanguage } from "@/contexts/language-context"
+import React from "react"
+import { careerTranslations } from "@/translations/career"
+import { getImagePath } from "@/lib/utils"
+
+export default function CareerPage() {
+  const { language } = useLanguage()
+  const t = careerTranslations[language]
+
+  // 就職先一覧
+  const companies = {
+    ja: [
+      "ソニーセミコンダクタ",
+      "東京エレクトロン",
+      "NEC",
+      "NEC通信システム",
+      "YE DIGITAL",
+      "ニコンシステム",
+      "神鋼商事",
+      "LeapMind",
+      "JAえひめ総合情報センター",
+      "高田工業所",
+      "東洋製罐グループホールディングス",
+      "MJC",
+      "宮崎県庁",
+      "産業技術総合研究所",
+      "フェニックスコンサルタント",
+      "スターフライヤー",
+      "SCSK",
+      "スズキ",
+      "JCOM（旧 ジュピターテレコム）",
+      "ドコモ・システムズ",
+      "アイシン・エィ・ダブリュ（アイシンに吸収合併）",
+      "シャープ",
+      "日鉄テックスエンジ",
+      "ミネベアミツミ",
+      "ファームノート",
+      "キオクシア",
+      "学校法人昭和大学",
+      "富士通エフサス",
+      "富士通九州ネットワークテクノロジーズ（富士通に吸収合併）",
+      "日立情報通信エンジニアリング",
+      "グンゼ",
+      "フェニックスシステム研究所",
+      "NOK",
+      "ライオン",
+      "富士ソフト",
+      "ダイハツ工業",
+    ],
+    en: [
+      "Sony Semiconductor",
+      "Tokyo Electron",
+      "NEC",
+      "NEC Communication Systems",
+      "YE DIGITAL",
+      "Nikon Systems",
+      "Shinsho Corporation",
+      "LeapMind",
+      "JA Ehime Information Center",
+      "Takada Corporation",
+      "Toyo Seikan Group Holdings",
+      "MJC",
+      "Miyazaki Prefectural Government",
+      "National Institute of Advanced Industrial Science and Technology",
+      "Phoenix Consultant",
+      "StarFlyer",
+      "SCSK",
+      "Suzuki",
+      "JCOM (formerly Jupiter Telecommunications)",
+      "Docomo Systems",
+      "Aisin AW (merged into Aisin)",
+      "Sharp",
+      "Nippon Steel Texeng",
+      "MinebeaMitsumi",
+      "Farmnote",
+      "Kioxia",
+      "Showa University",
+      "Fujitsu FSAS",
+      "Fujitsu Kyushu Network Technologies (merged into Fujitsu)",
+      "Hitachi Information & Communication Engineering",
+      "Gunze",
+      "Phoenix System Research Institute",
+      "NOK",
+      "Lion Corporation",
+      "Fuji Soft",
+      "Daihatsu Motor",
+    ],
+  }
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      {/* メインコンテンツ */}
+      <div className="flex-grow">
+        <div className="py-16">
+          {/* Career タイトル */}
+          <div className="text-center mb-16">
+            <div className="relative w-full max-w-md mx-auto h-16 mb-4">
+              <Image src={getImagePath("/images/logo_career.png")} alt="Career" fill className="object-contain" priority />
+            </div>
+            <p className="text-lg">{t.pageTitle}</p>
+          </div>
+
+          <div className="container">
+            <div className="grid md:grid-cols-2 gap-12">
+              {/* 左側：研究室の特徴 */}
+              <div>
+                <h2 className="text-2xl font-bold mb-6 border-b pb-2">{t.labFeatures}</h2>
+
+                <div className="space-y-8">
+                  <div>
+                    <h3 className="text-xl font-bold mb-3 text-primary">{t.equipment}</h3>
+                    <p className="text-gray-700">
+                      {t.equipmentDesc}
+                      <Link href="/research/facilities" className="text-primary hover:underline">
+                        {t.here}
+                      </Link>
+                      。
+                    </p>
+                  </div>
+
+                  <div>
+                    <h3 className="text-xl font-bold mb-3 text-primary">{t.learningEnv}</h3>
+                    <p className="text-gray-700">{t.learningEnvDesc}</p>
+                  </div>
+
+                  <div>
+                    <h3 className="text-xl font-bold mb-3 text-primary">{t.conferences}</h3>
+                    <p className="text-gray-700">{t.conferencesDesc}</p>
+                  </div>
+
+                  <div>
+                    <h3 className="text-xl font-bold mb-3 text-primary">{t.coreTime}</h3>
+                    <p className="text-gray-700">{t.coreTimeDesc}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 右側：就職先一覧 */}
+              <div>
+                <h2 className="text-2xl font-bold mb-6 border-b pb-2">{t.employmentList}</h2>
+
+                <div className="bg-gray-50 p-6">
+                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
+                    {companies[language].map((company, index) => (
+                      <li key={index} className="flex items-start">
+                        <span className="text-primary mr-2">•</span>
+                        <span>{company}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* 研究テーマ */}
+            <div className="mt-16">
+              <h2 className="text-2xl font-bold mb-6 border-b pb-2">{t.researchThemes}</h2>
+
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="p-6 bg-white">
+                  <h3 className="text-xl font-bold mb-3">{t.medical}</h3>
+                  <ul className="list-disc pl-5 space-y-2 text-gray-700">
+                    {t.medicalThemes.map((theme, index) => (
+                      <li key={index}>{theme}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="p-6 bg-white">
+                  <h3 className="text-xl font-bold mb-3">{t.agriculture}</h3>
+                  <ul className="list-disc pl-5 space-y-2 text-gray-700">
+                    {t.agricultureThemes.map((theme, index) => (
+                      <li key={index}>{theme}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="p-6 bg-white">
+                  <h3 className="text-xl font-bold mb-3">{t.imageProcessing}</h3>
+                  <ul className="list-disc pl-5 space-y-2 text-gray-700">
+                    {t.imageProcessingThemes.map((theme, index) => (
+                      <li key={index}>{theme}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* お問い合わせボタン */}
+            <div className="mt-16 text-center">
+              <h2 className="text-2xl font-bold mb-6">{t.interested}</h2>
+              <p className="max-w-2xl mx-auto mb-8 text-gray-700">
+                {t.interestedDesc.split("\\n").map((line, i) => (
+                  <React.Fragment key={i}>
+                    {line}
+                    {i < t.interestedDesc.split("\\n").length - 1 && <br />}
+                  </React.Fragment>
+                ))}
+              </p>
+              <Link href="/contact">
+                <Button size="lg" className="font-medium">
+                  {t.contact}
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+} 

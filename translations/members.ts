@@ -1,7 +1,7 @@
 export const membersTranslations = {
   ja: {
     title: "メンバー",
-    subtitle: "研究室のメンバー紹介",
+    subtitle: "メンバー",
     tabs: {
       faculty: "教員・研究員",
       students: "学生",
@@ -37,7 +37,7 @@ export const membersTranslations = {
   },
   en: {
     title: "Members",
-    subtitle: "Laboratory Members Introduction",
+    subtitle: "Members",
     tabs: {
       faculty: "Faculty",
       students: "Students",

@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "STATIC_EXPORT=true next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next build && next export"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -37,6 +38,7 @@
     "@radix-ui/react-toggle": "^1.1.1",
     "@radix-ui/react-toggle-group": "^1.1.1",
     "@radix-ui/react-tooltip": "^1.1.6",
+    "@types/nodemailer": "^6.4.17",
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -47,6 +49,7 @@
     "lucide-react": "^0.454.0",
     "next": "^15.2.4",
     "next-themes": "^0.4.4",
+    "nodemailer": "^7.0.3",
     "react": "^18.0.0",
     "react-day-picker": "8.10.1",
     "react-dom": "^18.0.0",
@@ -63,6 +66,8 @@
     "@types/node": "^22",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "eslint": "^9.27.0",
+    "eslint-config-next": "^15.3.2",
     "postcss": "^8",
     "tailwindcss": "^3.4.17",
     "typescript": "^5"

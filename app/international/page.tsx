@@ -33,14 +33,14 @@ export default function InternationalPage() {
       title: t.programs.internationalConferences.title,
       description: t.programs.internationalConferences.description,
       image: "/images/inter_conf.jpg",
-      link: "/publications/international",
+      link: "/achievements#international",
     },
     {
       id: "exchange-students",
       title: t.programs.exchangeStudents.title,
       description: t.programs.exchangeStudents.description,
       image: "/images/ryuugakusei.jpg",
-      link: "/international/exchange-students",
+      link: "/members#students",
     },
   ]
 
@@ -51,16 +51,16 @@ export default function InternationalPage() {
         <div className="py-16">
           {/* International Collaboration タイトル */}
           <div className="text-center mb-16">
-            <div className="relative w-full max-w-xs mx-auto h-20 mb-2">
+            <div className="relative w-full max-w-xl mx-auto h-32 mb-4">
               <Image
-                src="/images/international_collaboration.png"
+                src="/images/logo_international_collaboration.png"
                 alt="International Collaboration"
                 fill
                 className="object-contain"
                 priority
               />
             </div>
-            <p className="text-xl">{t.subtitle}</p>
+            <p className="text-lg">{t.subtitle}</p>
           </div>
 
           <div className="container">
@@ -77,7 +77,7 @@ export default function InternationalPage() {
                         src={program.image || "/placeholder.svg"}
                         alt={program.title}
                         fill
-                        className="object-cover"
+                        className={program.id === 'sakura-science' ? 'object-contain' : 'object-cover'}
                       />
                     </div>
                     <div className="p-6 md:col-span-2 flex flex-col justify-between">

@@ -1,12 +1,7 @@
-"use client"
-
-import { useState, useMemo, useEffect } from "react"
-import { useSearchParams } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { useLanguage } from "@/contexts/language-context"
 import { researchProjectsTranslations } from "@/translations/research-projects"
+import { getImagePath } from "@/lib/utils"
 
 // 研究プロジェクトの型定義
 type ResearchProject = {
@@ -19,235 +14,168 @@ type ResearchProject = {
 }
 
 export default function ResearchProjectsPage() {
-  const searchParams = useSearchParams()
-  const { language } = useLanguage()
+  const language = "ja"
   const t = researchProjectsTranslations[language]
 
-  // URLからカテゴリパラメータを取得
-  const categoryParam = searchParams.get("category")
-  console.log("URL category parameter:", categoryParam) // デバッグ用
+  // 研究プロジェクトデータ
+  const researchProjects: ResearchProject[] = [
+    // 医療分野
+    {
+      id: "fetal-monitoring",
+      title: t.projects.fetalMonitoring.title,
+      description: t.projects.fetalMonitoring.description,
+      image: getImagePath("/images/research_medical.png"),
+      link: "/research/projects/fetal-monitoring",
+      keywords: ["医療", "AI", "画像処理"],
+    },
 
-  // 選択されたキーワード（URLパラメータから初期値を設定）
-  const [selectedKeyword, setSelectedKeyword] = useState(categoryParam || t.keywords.all)
+    // 牛管理分野
+    {
+      id: "calving-prediction",
+      title: t.projects.calvingPrediction.title,
+      description: t.projects.calvingPrediction.description,
+      image: getImagePath("/images/research_cow.jpg"),
+      link: "/research/projects/calving-prediction",
+      keywords: ["牛", "AI", "画像処理"],
+    },
+    {
+      id: "cattle-identification",
+      title: t.projects.cattleIdentification.title,
+      description: t.projects.cattleIdentification.description,
+      image: getImagePath("/images/research_cow.jpg"),
+      link: "/research/projects/cattle-identification",
+      keywords: ["牛", "AI", "画像処理"],
+    },
+    {
+      id: "bcs-evaluation",
+      title: t.projects.bcsEvaluation.title,
+      description: t.projects.bcsEvaluation.description,
+      image: getImagePath("/images/research_cow.jpg"),
+      link: "/research/projects/bcs-evaluation",
+      keywords: ["牛", "AI", "画像処理"],
+    },
+    {
+      id: "calf-behavior-analysis",
+      title: t.projects.calfBehaviorAnalysis.title,
+      description: t.projects.calfBehaviorAnalysis.description,
+      image: getImagePath("/images/research_cow.jpg"),
+      link: "/research/projects/calf-behavior-analysis",
+      keywords: ["牛", "データ分析"],
+    },
+    {
+      id: "cattle-feeding",
+      title: t.projects.cattleFeeding.title,
+      description: t.projects.cattleFeeding.description,
+      image: getImagePath("/images/research_cow.jpg"),
+      link: "/research/projects/cattle-feeding",
+      keywords: ["牛", "AI"],
+    },
+    {
+      id: "ear-tag-identification",
+      title: t.projects.earTagIdentification.title,
+      description: t.projects.earTagIdentification.description,
+      image: getImagePath("/images/research_cow.jpg"),
+      link: "/research/projects/ear-tag-identification",
+      keywords: ["牛", "画像処理"],
+    },
 
-  // URLパラメータが変更されたときに選択キーワードを更新
-  useEffect(() => {
-    if (categoryParam) {
-      setSelectedKeyword(categoryParam)
-      console.log("Category param detected:", categoryParam) // デバッグ用
-    }
-  }, [categoryParam])
+    // 人管理分野
+    {
+      id: "elderly-monitoring",
+      title: t.projects.elderlyMonitoring.title,
+      description: t.projects.elderlyMonitoring.description,
+      image: getImagePath("/images/research_oldmen.png"),
+      link: "/research/projects/elderly-monitoring",
+      keywords: ["人", "AI", "データ分析"],
+    },
+  ]
 
-  // 言語が変更されたときに選択キーワードを更新するための useEffect を追加します
-  // また、キーワードの対応関係を定義します
+  // キーワードリスト
+  const keywords = [
+    t.keywords.all,
+    "牛",
+    "人",
+    "医療",
+    "AI",
+    "画像処理",
+    "データ分析",
+  ]
 
-  // 既存の useEffect の後に以下のコードを追加します
-  useEffect(() => {
-    // 言語が変更されたときに選択キーワードを対応する言語のものに更新
-    if (selectedKeyword === "すべて" || selectedKeyword === "All") {
-      // 「すべて」/「All」の場合は現在の言語の「すべて」に変更
-      setSelectedKeyword(t.keywords.all)
-    } else if (selectedKeyword === "牛" || selectedKeyword === "Cattle") {
-      // 「牛」/「Cattle」の場合は現在の言語の対応するものに変更
-      setSelectedKeyword(language === "ja" ? "牛" : "Cattle")
-    } else if (selectedKeyword === "人" || selectedKeyword === "Human") {
-      // 「人」/「Human」の場合は現在の言語の対応するものに変更
-      setSelectedKeyword(language === "ja" ? "人" : "Human")
-    } else if (selectedKeyword === "医療" || selectedKeyword === "Medical") {
-      // 「医療」/「Medical」の場合は現在の言語の対応するものに変更
-      setSelectedKeyword(language === "ja" ? "医療" : "Medical")
-    }
-    // AI はそのままでOK
-  }, [language, t.keywords.all])
-
-  const researchProjectsData: ResearchProject[] = useMemo(
-    () => [
-      {
-        id: "cattle-feeding",
-        title: t.projects.cattleFeeding.title,
-        description: t.projects.cattleFeeding.description,
-        image: "/images/research-ishikawa.png",
-        link: "/research/projects/cattle-feeding",
-        keywords: ["AI", language === "ja" ? "牛" : "Cattle"],
-      },
-      {
-        id: "calving-prediction",
-        title: t.projects.calvingPrediction.title,
-        description: t.projects.calvingPrediction.description,
-        image: "/images/research-murayama.png",
-        link: "/research/projects/calving-prediction",
-        keywords: ["AI", language === "ja" ? "牛" : "Cattle"],
-      },
-      {
-        id: "elderly-monitoring",
-        title: t.projects.elderlyMonitoring.title,
-        description: t.projects.elderlyMonitoring.description,
-        image: "/images/research-remon.png",
-        link: "/research/projects/elderly-monitoring",
-        keywords: ["AI", language === "ja" ? "人" : "Human"],
-      },
-      {
-        id: "fetal-monitoring",
-        title: t.projects.fetalMonitoring.title,
-        description: t.projects.fetalMonitoring.description,
-        image: "/images/research-tunn.png",
-        link: "/research/projects/fetal-monitoring",
-        keywords: ["AI", language === "ja" ? "人" : "Human", language === "ja" ? "医療" : "Medical"],
-      },
-      {
-        id: "bcs-evaluation",
-        title: t.projects.bcsEvaluation.title,
-        description: t.projects.bcsEvaluation.description,
-        image: "/images/research-tikunami.png",
-        link: "/research/projects/bcs-evaluation",
-        keywords: ["AI", language === "ja" ? "牛" : "Cattle"],
-      },
-      {
-        id: "cattle-identification",
-        title: t.projects.cattleIdentification.title,
-        description: t.projects.cattleIdentification.description,
-        image: "/images/research-siihara.png",
-        link: "/research/projects/cattle-identification",
-        keywords: ["AI", language === "ja" ? "牛" : "Cattle"],
-      },
-      {
-        id: "ear-tag-identification",
-        title: t.projects.earTagIdentification.title,
-        description: t.projects.earTagIdentification.description,
-        image: "/images/research-simizu.png",
-        link: "/research/projects/ear-tag-identification",
-        keywords: ["AI", language === "ja" ? "牛" : "Cattle"],
-      },
-      {
-        id: "calf-behavior-analysis",
-        title: t.projects.calfBehaviorAnalysis.title,
-        description: t.projects.calfBehaviorAnalysis.description,
-        image: "/images/research-nishiyama.png",
-        link: "/research/projects/calf-behavior-analysis",
-        keywords: ["AI", language === "ja" ? "牛" : "Cattle"],
-      },
-    ],
-    [
-      language,
-      t.projects.cattleFeeding.title,
-      t.projects.cattleFeeding.description,
-      t.projects.calvingPrediction.title,
-      t.projects.calvingPrediction.description,
-      t.projects.elderlyMonitoring.title,
-      t.projects.elderlyMonitoring.description,
-      t.projects.fetalMonitoring.title,
-      t.projects.fetalMonitoring.description,
-      t.projects.bcsEvaluation.title,
-      t.projects.bcsEvaluation.description,
-      t.projects.cattleIdentification.title,
-      t.projects.cattleIdentification.description,
-      t.projects.earTagIdentification.title,
-      t.projects.earTagIdentification.description,
-      t.projects.calfBehaviorAnalysis.title,
-      t.projects.calfBehaviorAnalysis.description,
-    ],
-  )
-
-  // 全てのキーワードを抽出（重複なし）
-  const allKeywords = useMemo(() => {
-    const keywordsSet = new Set<string>()
-    researchProjectsData.forEach((project) => {
-      project.keywords?.forEach((keyword) => keywordsSet.add(keyword))
-    })
-    return [t.keywords.all, ...Array.from(keywordsSet)]
-  }, [t.keywords.all, researchProjectsData])
-
-  // 選択されたキーワードでフィルタリングされたプロジェクト
-  const filteredProjects = useMemo(() => {
-    if (selectedKeyword === t.keywords.all) {
-      return researchProjectsData
-    }
-    return researchProjectsData.filter((project) => project.keywords?.includes(selectedKeyword))
-  }, [selectedKeyword, t.keywords.all, researchProjectsData])
+  // すべてのプロジェクトを表示（フィルタリングなし）
+  const filteredProjects = researchProjects
 
   return (
     <div className="min-h-screen flex flex-col">
       {/* メインコンテンツ */}
       <div className="flex-grow">
         <div className="py-16">
-          {/* Research タイトル */}
+          {/* Research Projects タイトル */}
           <div className="text-center mb-16">
-            <div className="relative w-full max-w-xs mx-auto h-20 mb-2">
-              <Image src="/images/research.png" alt="Research" fill style={{ objectFit: "contain" }} priority />
+            <div className="relative w-full max-w-md mx-auto h-16 mb-4">
+              <Image
+                src={getImagePath("/images/logo_research.png")}
+                alt="Research Projects"
+                fill
+                className="object-contain"
+                priority
+              />
             </div>
-            <p className="text-xl">{t.subtitle}</p>
+            <p className="text-lg">{t.subtitle}</p>
           </div>
 
-          <div className="container">
-            {/* キーワードフィルター */}
-            <div className="flex justify-center mb-8">
-              <div className="flex flex-wrap gap-2 justify-center">
-                {allKeywords.map((keyword) => (
-                  <Button
-                    key={keyword}
-                    variant={selectedKeyword === keyword ? "default" : "outline"}
-                    onClick={() => setSelectedKeyword(keyword)}
-                    className="px-4 py-2"
-                  >
-                    {keyword}
-                  </Button>
-                ))}
-              </div>
+          {/* キーワードフィルター（静的表示） */}
+          <div className="container mb-8">
+            <div className="flex flex-wrap gap-2 justify-center">
+              {keywords.map((keyword) => (
+                <button
+                  key={keyword}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                    keyword === t.keywords.all
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                  }`}
+                  disabled
+                >
+                  {keyword}
+                </button>
+              ))}
             </div>
+          </div>
 
-            {/* プロジェクト一覧 */}
-            <div className="grid gap-8">
+          {/* プロジェクトグリッド */}
+          <div className="container">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredProjects.map((project) => (
-                <div key={project.id} className="overflow-hidden bg-white border-b border-gray-200">
-                  <div className="grid md:grid-cols-3 gap-6">
-                    <div className="relative aspect-[4/3] md:col-span-1">
+                <Link key={project.id} href={project.link} className="group">
+                  <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div className="relative h-48 overflow-hidden">
                       <Image
-                        src={project.image || "/placeholder.svg"}
+                        src={project.image}
                         alt={project.title}
                         fill
-                        className="object-contain"
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
-                    <div className="p-6 md:col-span-2 flex flex-col justify-between">
-                      <div>
-                        <h2 className="text-2xl font-bold mb-4">{project.title}</h2>
-                        <p className="text-gray-700 mb-6">{project.description}</p>
-                        {project.keywords && (
-                          <div className="flex flex-wrap gap-2 mb-4">
-                            {project.keywords.map((keyword, index) => (
-                              <span
-                                key={index}
-                                className="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full cursor-pointer hover:bg-gray-200"
-                                onClick={() => setSelectedKeyword(keyword)}
-                              >
-                                {keyword}
-                              </span>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                      <div>
-                        <Link href={project.link} className="text-primary hover:underline font-medium">
-                          {t.viewDetails} →
-                        </Link>
+                    <div className="p-6">
+                      <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
+                        {project.title}
+                      </h3>
+                      <p className="text-gray-600 line-clamp-3">{project.description}</p>
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {project.keywords?.map((keyword) => (
+                          <span
+                            key={keyword}
+                            className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded-full"
+                          >
+                            {keyword}
+                          </span>
+                        ))}
                       </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
-
-            {/* 検索結果がない場合 */}
-            {filteredProjects.length === 0 && (
-              <div className="text-center py-12">
-                <p className="text-gray-500">
-                  「{selectedKeyword}」{t.noResults.message}
-                </p>
-                <Button variant="outline" className="mt-4" onClick={() => setSelectedKeyword(t.keywords.all)}>
-                  {t.noResults.showAll}
-                </Button>
-              </div>
-            )}
           </div>
         </div>
       </div>

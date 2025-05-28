@@ -1,19 +1,17 @@
-"use client"
-
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { useLanguage } from "@/contexts/language-context"
+import { getImagePath } from "@/lib/utils"
 
 export default function ContactPage() {
-  const { language } = useLanguage()
+  const language = "ja"
 
   const translations = {
     title: {
-      ja: "研究室への見学希望、共同研究のご相談など、お気軽にお問い合わせください",
-      en: "Feel free to contact us regarding lab visits, research collaboration inquiries, or any other questions",
+      ja: "お問い合わせ",
+      en: "Contact",
     },
     name: {
       ja: "お名前",
@@ -47,77 +45,136 @@ export default function ContactPage() {
       ja: "送信する",
       en: "Submit",
     },
+    access: {
+      ja: "アクセス",
+      en: "Access",
+    },
+    address: {
+      ja: "〒889-2155 宮崎県宮崎市学園木花台西1-1 工学部E棟",
+      en: "〒889-2155 1-1 Gakuen Kibanadai Nishi, Miyazaki City, Miyazaki Prefecture, Faculty of Engineering Building E",
+    },
+    accessMethods: {
+      ja: [
+        "JR日豊本線 宮崎大学前駅 より 徒歩約10分",
+        "宮崎交通バス 宮崎大学前バス停 より 徒歩約5分",
+        "宮崎空港 より 車で約15分"
+      ],
+      en: [
+        "About 10 minutes walk from JR Nippo Main Line Miyazaki University Station",
+        "About 5 minutes walk from Miyazaki Kotsu Bus Miyazaki University Bus Stop", 
+        "About 15 minutes by car from Miyazaki Airport"
+      ]
+    },
   }
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* メインコンテンツ */}
-      <div className="flex-grow">
-        <div className="py-16">
-          {/* Contact タイトル */}
-          <div className="text-center mb-16">
-            <div className="relative w-full max-w-xs mx-auto h-20 mb-2">
+      {/* ヘッダーセクション */}
+      <section className="py-16">
+        <div className="container">
+          <div className="text-center mb-0">
+            <div className="relative w-full max-w-md mx-auto h-16 mb-4"> {/* ロゴサイズを元に戻し、マージン調整 */}
               <Image
-                src="/images/contact.png"
+                src={getImagePath("/images/logo_contact.png")}
                 alt={language === "ja" ? "お問い合わせ" : "Contact"}
                 fill
-                className="object-contain"
+                className="object-contain" /* drop-shadow-lg を削除 */
                 priority
               />
             </div>
-            <p className="text-xl">{translations.title[language]}</p>
+            <p className="text-lg">{translations.title[language]}</p> {/* text-gray-600 を削除 */}
           </div>
+        </div>
+      </section>
 
-          <div className="container">
-            <div className="max-w-3xl mx-auto">
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">
-                      {translations.name[language]} <span className="text-red-500">*</span>
-                    </Label>
-                    <Input id="name" required />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="organization">{translations.organization[language]}</Label>
-                    <Input id="organization" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email">
-                      {translations.email[language]} <span className="text-red-500">*</span>
-                    </Label>
-                    <Input id="email" type="email" required />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="phone">{translations.phone[language]}</Label>
-                    <Input id="phone" type="tel" />
-                  </div>
-                </div>
-
+      {/* メインコンテンツ */}
+      <div className="flex-grow pb-16"> {/* 下のパディングのみ追加 */}
+        <div className="container">
+          <div className="max-w-3xl mx-auto">
+            <form className="space-y-6" action="/api/contact" method="POST">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <Label htmlFor="subject">
-                    {translations.subject[language]} <span className="text-red-500">*</span>
+                  <Label htmlFor="name">
+                    {translations.name[language]} <span className="text-red-500">*</span>
                   </Label>
-                  <Input id="subject" required />
+                  <Input id="name" name="name" required />
                 </div>
-
                 <div className="space-y-2">
-                  <Label htmlFor="message">
-                    {translations.message[language]} <span className="text-red-500">*</span>
+                  <Label htmlFor="organization">{translations.organization[language]}</Label>
+                  <Input id="organization" name="organization" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="email">
+                    {translations.email[language]} <span className="text-red-500">*</span>
                   </Label>
-                  <Textarea id="message" rows={6} required />
+                  <Input id="email" name="email" type="email" required />
                 </div>
+                <div className="space-y-2">
+                  <Label htmlFor="phone">{translations.phone[language]}</Label>
+                  <Input id="phone" name="phone" type="tel" />
+                </div>
+              </div>
 
-                <div className="text-center">
-                  <Button type="submit" className="px-8">
-                    {translations.submit[language]}
-                  </Button>
-                </div>
-              </form>
-            </div>
+              <div className="space-y-2">
+                <Label htmlFor="subject">
+                  {translations.subject[language]} <span className="text-red-500">*</span>
+                </Label>
+                <Input id="subject" name="subject" required />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="message">
+                  {translations.message[language]} <span className="text-red-500">*</span>
+                </Label>
+                <Textarea id="message" name="message" rows={6} required />
+              </div>
+
+              <div className="text-center">
+                <Button type="submit" className="px-8">
+                  {translations.submit[language]}
+                </Button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
+
+      {/* アクセス情報セクション */}
+      <section className="py-16 bg-white">
+        <div className="container max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">{translations.access[language]}</h2>
+            <div className="w-full h-0.5 bg-gray-300"></div>
+          </div>
+          
+          <div className="space-y-8">
+            {/* 住所情報とアクセス方法 */}
+            <div className="text-left">
+              <p className="text-base text-gray-700 whitespace-pre-line leading-relaxed mb-4">
+                {translations.address[language]}
+              </p>
+              <ul className="space-y-2 text-sm text-gray-700">
+                {translations.accessMethods[language].map((method, index) => (
+                  <li key={index}>• {method}</li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Google Maps */}
+            <div className="rounded-lg overflow-hidden shadow-lg">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1464.6325901434873!2d131.41278741911535!3d31.82849052554477!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3538c850b44cbba5%3A0x8f5e37f0338b2dac!2z5a6u5bSO5aSn5a2mIOacqOiKseOCreODo-ODs-ODkeOCuQ!5e0!3m2!1sja!2sjp!4v1748318199198!5m2!1sja!2sjp" 
+                width="100%" 
+                height="500" 
+                style={{border: 0}} 
+                allowFullScreen 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }

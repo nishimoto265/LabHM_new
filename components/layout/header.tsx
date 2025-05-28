@@ -38,7 +38,11 @@ const Header = () => {
   // ハッシュリンクのナビゲーション処理
   const handleHashNavigation = (e: React.MouseEvent, hash: string) => {
     e.preventDefault()
-    if (pathname.endsWith("/members")) {
+    
+    // 現在のpathnameがmembersページかどうかをチェック（basePathも考慮）
+    const isMembersPage = pathname.endsWith("/members") || pathname.endsWith("/members/")
+    
+    if (isMembersPage) {
       // 既にmembersページにいる場合は、直接ハッシュに移動
       window.location.hash = hash
       const element = document.querySelector(hash)
@@ -46,8 +50,11 @@ const Header = () => {
         element.scrollIntoView({ behavior: "smooth" })
       }
     } else {
-      // 他のページからの場合は、ページ遷移してからハッシュに移動
-      window.location.href = `/members${hash}`
+      // 他のページからの場合は、現在のパスからbasePathを検出してURLを構築
+      const currentPath = window.location.pathname
+      const isImagelabSite = currentPath.includes('/imagelab')
+      const basePath = isImagelabSite ? '/imagelab' : ''
+      window.location.href = `${basePath}/members${hash}`
     }
   }
 

@@ -7,6 +7,7 @@ import Link from "next/link"
 import { useLanguage } from "@/contexts/language-context"
 import { newsData, newsTags } from "@/translations/news-data"
 import { getTagBgColor } from "@/lib/news-utils"
+import { getImagePath } from "@/lib/utils"
 
 export default function NewsPage() {
   const { language } = useLanguage()
@@ -63,7 +64,7 @@ export default function NewsPage() {
           {/* News タイトル */}
           <div className="text-center mb-16">
             <div className="relative w-full max-w-md mx-auto h-16 mb-4">
-              <Image src="/images/logo_news.png" alt="News" fill className="object-contain" priority />
+              <Image src={getImagePath("/images/logo_news.png")} alt="News" fill className="object-contain" priority />
             </div>
             <p className="text-lg">{language === 'ja' ? 'ニュース' : 'News'}</p>
           </div>
@@ -107,7 +108,7 @@ export default function NewsPage() {
                             className="block w-full h-full"
                           >
                             <Image
-                              src={newsItem.image && newsItem.image.trim() !== "" ? newsItem.image : "/logo.png"}
+                              src={newsItem.image && newsItem.image.trim() !== "" ? getImagePath(newsItem.image) : getImagePath("/logo.png")}
                               alt={newsItem.title}
                               fill
                               className={`${(newsItem.image && newsItem.image.trim() !== "") ? 'object-cover' : 'object-contain p-4'} transition-transform group-hover:scale-105`}
@@ -119,7 +120,7 @@ export default function NewsPage() {
                             className="block w-full h-full"
                           >
                             <Image
-                              src={newsItem.image && newsItem.image.trim() !== "" ? newsItem.image : "/logo.png"}
+                              src={newsItem.image && newsItem.image.trim() !== "" ? getImagePath(newsItem.image) : getImagePath("/logo.png")}
                               alt={newsItem.title}
                               fill
                               className={`${(newsItem.image && newsItem.image.trim() !== "") ? 'object-cover' : 'object-contain p-4'} transition-transform group-hover:scale-105`}
@@ -128,7 +129,7 @@ export default function NewsPage() {
                         )
                       ) :
                         <Image
-                          src={newsItem.image && newsItem.image.trim() !== "" ? newsItem.image : "/logo.png"}
+                          src={newsItem.image && newsItem.image.trim() !== "" ? getImagePath(newsItem.image) : getImagePath("/logo.png")}
                           alt={newsItem.title}
                           fill
                           className={`${(newsItem.image && newsItem.image.trim() !== "") ? 'object-cover' : 'object-contain p-4'}`}

@@ -11,6 +11,7 @@ import Link from "next/link"
 import { ChevronDown } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
 import { membersTranslations } from "@/translations/members"
+import { getImagePath } from "@/lib/utils"
 import { 
   getCompleteFacultyMembers,
   getCompleteStudentsByProgram,
@@ -58,7 +59,7 @@ function MemberCard({ member, language, showResearchTopic = false }: {
     <div className="text-left px-4 py-6">
       <div className="relative w-44 h-44 mb-3">
         <Image
-          src={member.image || "/images/no_image.png"}
+          src={getImagePath(member.image || "/images/no_image.png")}
           alt={member.name}
           fill
           className="object-cover rounded-none"
@@ -204,7 +205,10 @@ export default function MembersPage() {
   // タブ変更時にURLハッシュも更新
   const handleTabChange = (value: string) => {
     setActiveTab(value)
-    window.history.replaceState(null, "", `/imagelab/members#${value}`)
+    // basePath対応のURL生成
+    const basePath = typeof window !== 'undefined' ? 
+      (document.querySelector('script[src*="/_next/"]')?.getAttribute('src')?.match(/^(\/[^\/]+)?\//))?.[1] || '' : ''
+    window.history.replaceState(null, "", `${basePath}/members#${value}`)
   }
 
   // 卒業生を学位タイプ別にグループ化
@@ -225,9 +229,9 @@ export default function MembersPage() {
           {/* Member タイトル */}
           <div className="text-center mb-16">
             <div className="relative w-full max-w-md mx-auto h-16 mb-4">
-              <Image src="/images/logo_member.png" alt="Member" fill className="object-contain" priority />
+              <Image src={getImagePath("/images/logo_member.png")} alt="Member" fill className="object-contain" priority />
             </div>
-            <p className="text-lg">{t.subtitle}</p>
+            <p className="text-lg">{language === 'ja' ? 'メンバー' : 'Members'}</p>
           </div>
 
           <div className="container">
@@ -279,7 +283,7 @@ export default function MembersPage() {
                         <div className="md:col-span-1">
                           <div className="relative aspect-square max-w-xs mx-auto">
                             <Image
-                              src={member.image || "/placeholder.svg"}
+                              src={getImagePath(member.image || "/placeholder.svg")}
                               alt={member.name}
                               fill
                               className="object-cover rounded-lg"

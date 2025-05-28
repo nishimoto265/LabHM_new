@@ -1,16 +1,13 @@
 "use client"
 
-import type React from "react"
-
-import { useState, useEffect } from "react"
-import Link from "next/link"
 import Image from "next/image"
-import { usePathname, useRouter } from "next/navigation"
-import { cn } from "@/lib/utils"
-// Lucide Reactからインポートするアイコンを追加
-import { Search, ChevronDown, Menu, X } from "lucide-react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { useState, useEffect } from "react"
+import { Menu, X, Search, ChevronDown } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
-import { getImagePath } from "@/lib/utils"
+import { cn } from "@/lib/utils"
+import { getImagePath, getLinkPath } from "@/lib/utils"
 
 // useState部分を更新して、メニューの開閉状態を管理
 const Header = () => {
@@ -18,7 +15,6 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const pathname = usePathname()
-  const router = useRouter()
   const { language, setLanguage } = useLanguage()
 
   // 2. 検索処理を行う関数を追加
@@ -38,11 +34,7 @@ const Header = () => {
   // ハッシュリンクのナビゲーション処理
   const handleHashNavigation = (e: React.MouseEvent, hash: string) => {
     e.preventDefault()
-    
-    // 現在のpathnameがmembersページかどうかをチェック（basePathも考慮）
-    const isMembersPage = pathname.endsWith("/members") || pathname.endsWith("/members/")
-    
-    if (isMembersPage) {
+    if (pathname.endsWith("/members")) {
       // 既にmembersページにいる場合は、直接ハッシュに移動
       window.location.hash = hash
       const element = document.querySelector(hash)
@@ -50,11 +42,8 @@ const Header = () => {
         element.scrollIntoView({ behavior: "smooth" })
       }
     } else {
-      // 他のページからの場合は、現在のパスからbasePathを検出してURLを構築
-      const currentPath = window.location.pathname
-      const isImagelabSite = currentPath.includes('/imagelab')
-      const basePath = isImagelabSite ? '/imagelab' : ''
-      window.location.href = `${basePath}/members${hash}`
+      // 他のページからの場合は、ページ遷移してからハッシュに移動
+      window.location.href = getLinkPath(`/members${hash}`)
     }
   }
 
@@ -171,21 +160,21 @@ const Header = () => {
             </div>
             <div className="absolute left-0 top-full w-48 bg-white shadow-md rounded-b-md overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
               <a
-                href="/members#faculty"
+                href={getLinkPath("/members#faculty")}
                 className="block px-4 py-2 text-sm hover:bg-gray-100"
                 onClick={(e) => handleHashNavigation(e, "#faculty")}
               >
                 {currentMenu.faculty}
               </a>
               <a
-                href="/members#students"
+                href={getLinkPath("/members#students")}
                 className="block px-4 py-2 text-sm hover:bg-gray-100"
                 onClick={(e) => handleHashNavigation(e, "#students")}
               >
                 {currentMenu.students}
               </a>
               <a
-                href="/members#alumni"
+                href={getLinkPath("/members#alumni")}
                 className="block px-4 py-2 text-sm hover:bg-gray-100"
                 onClick={(e) => handleHashNavigation(e, "#alumni")}
               >
@@ -318,7 +307,7 @@ const Header = () => {
               </div>
               <div className="pr-4 mt-2 space-y-2 text-right">
                 <a 
-                  href="/members#faculty" 
+                  href={getLinkPath("/members#faculty")} 
                   className="block py-1 text-sm" 
                   onClick={(e) => {
                     handleHashNavigation(e, "#faculty")
@@ -328,7 +317,7 @@ const Header = () => {
                   {currentMenu.faculty}
                 </a>
                 <a 
-                  href="/members#students" 
+                  href={getLinkPath("/members#students")} 
                   className="block py-1 text-sm" 
                   onClick={(e) => {
                     handleHashNavigation(e, "#students")
@@ -338,7 +327,7 @@ const Header = () => {
                   {currentMenu.students}
                 </a>
                 <a 
-                  href="/members#alumni" 
+                  href={getLinkPath("/members#alumni")} 
                   className="block py-1 text-sm" 
                   onClick={(e) => {
                     handleHashNavigation(e, "#alumni")

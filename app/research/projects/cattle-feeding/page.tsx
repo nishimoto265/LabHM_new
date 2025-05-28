@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { getImagePath } from "@/lib/utils"
 // 言語コンテキストを使用するために必要なインポートを追加
 
 // 翻訳データを定義
@@ -87,7 +88,7 @@ export default function CattleFeedingPage() {
       <section 
         className="relative py-16 md:py-20 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/images/normal_header.png')"
+          backgroundImage: `url(${getImagePath('/images/normal_header.png')})`
         }}
       >
         {/* オーバーレイ */}
@@ -117,7 +118,7 @@ export default function CattleFeedingPage() {
                 style={{ height: "auto", minHeight: "250px" }}
               >
                 <Image
-                  src="/images/research-ishikawa1.png"
+                  src={getImagePath("/images/research-ishikawa1.png")}
                   alt={translations.experimentBackground.title[language]}
                   fill
                   className="object-contain"
@@ -135,7 +136,7 @@ export default function CattleFeedingPage() {
                 style={{ height: "auto", minHeight: "250px" }}
               >
                 <Image
-                  src="/images/research-ishikawa2.png"
+                  src={getImagePath("/images/research-ishikawa2.png")}
                   alt={translations.experimentEnvironment.title[language]}
                   fill
                   className="object-contain"
@@ -153,7 +154,7 @@ export default function CattleFeedingPage() {
                 style={{ height: "auto", minHeight: "250px" }}
               >
                 <Image
-                  src="/images/research-ishikawa3.png"
+                  src={getImagePath("/images/research-ishikawa3.png")}
                   alt={translations.experimentResults.title[language]}
                   fill
                   className="object-contain"

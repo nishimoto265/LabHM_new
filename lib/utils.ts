@@ -5,38 +5,49 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-// 画像パスを正規化する関数（開発環境・本番環境共通）
+// 画像パスを正規化する関数（basePath対応）
 export function getImagePath(path: string): string {
-  // 開発環境では常に imagelab プレフィックスを除去して相対パスを返す
-  if (process.env.NODE_ENV === 'development') {
-    if (path.startsWith('/imagelab/')) {
-      return path.replace('/imagelab', '')
-    }
-    // 相対パスの場合は適切な形式に変換
-    if (path.startsWith('./')) {
-      return path.replace('./', '/')
-    }
-    return path
-  }
-  
-  // 本番環境（ビルド時）の処理 - /imagelab/ プレフィックスを追加
-  if (path.startsWith('/imagelab/')) {
-    // 既に /imagelab/ がある場合はそのまま返す
-    return path
-  }
-  
+  // 相対パスの場合は適切な形式に変換
   if (path.startsWith('./')) {
-    // ./images/ → /imagelab/images/ に変換
-    return path.replace('./', '/imagelab/')
+    path = path.replace('./', '/')
   }
   
-  if (path.startsWith('/')) {
-    // /images/ → /imagelab/images/, /logo.png → /imagelab/logo.png に変換
-    return `/imagelab${path}`
+  // 本番ビルド時（basePath設定時）はプレフィックスを追加
+  if (typeof window !== 'undefined') {
+    // クライアントサイドでbasePath情報を取得
+    const basePath = document.querySelector('script[src*="/_next/"]')?.getAttribute('src')?.match(/^(\/[^\/]+)?\//)
+    if (basePath && basePath[1]) {
+      return basePath[1] + path
+    }
+  } else {
+    // サーバーサイドまたはビルド時
+    if (process.env.STATIC_EXPORT === 'true') {
+      return '/imagelab' + path
+    }
   }
   
-  // その他の場合
-  return `/imagelab/${path}`
+  // 開発環境または通常の場合はそのまま返す
+  return path
+}
+
+// リンクパスを正規化する関数（basePath対応）
+export function getLinkPath(path: string): string {
+  // 本番ビルド時（basePath設定時）はプレフィックスを追加
+  if (typeof window !== 'undefined') {
+    // クライアントサイドでbasePath情報を取得
+    const basePath = document.querySelector('script[src*="/_next/"]')?.getAttribute('src')?.match(/^(\/[^\/]+)?\//)
+    if (basePath && basePath[1]) {
+      return basePath[1] + path
+    }
+  } else {
+    // サーバーサイドまたはビルド時
+    if (process.env.STATIC_EXPORT === 'true') {
+      return '/imagelab' + path
+    }
+  }
+  
+  // 開発環境または通常の場合はそのまま返す
+  return path
 }
 
 // 背景画像のスタイルを生成する関数

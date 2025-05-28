@@ -1,8 +1,9 @@
-
+"use client"
 
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { getImagePath } from "@/lib/utils"
 
 export default function BcsEvaluationPage() {
   const language = "ja"
@@ -116,7 +117,7 @@ export default function BcsEvaluationPage() {
       <section 
         className="relative py-16 md:py-20 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/images/normal_header.png')"
+          backgroundImage: `url(${getImagePath('/images/normal_header.png')})`
         }}
       >
         {/* オーバーレイ */}
@@ -162,7 +163,7 @@ export default function BcsEvaluationPage() {
                 style={{ height: "auto", minHeight: "250px" }}
               >
                 <Image
-                  src="/images/research-tikunami1.png"
+                  src={getImagePath("/images/research-tikunami1.png")}
                   alt={language === "ja" ? "研究手法" : "Research Methods"}
                   fill
                   className="object-contain"

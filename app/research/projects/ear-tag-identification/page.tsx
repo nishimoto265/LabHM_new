@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { getImagePath } from "@/lib/utils"
 
 export default function EarTagIdentificationPage() {
   const language = "ja"
@@ -114,7 +115,7 @@ export default function EarTagIdentificationPage() {
       <section 
         className="relative py-16 md:py-20 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/images/normal_header.png')"
+          backgroundImage: `url(${getImagePath('/images/normal_header.png')})`
         }}
       >
         {/* オーバーレイ */}
@@ -144,7 +145,7 @@ export default function EarTagIdentificationPage() {
                 style={{ height: "auto", minHeight: "250px" }}
               >
                 <Image
-                  src="/images/research-simizu1.png"
+                  src={getImagePath("/images/research-simizu1.png")}
                   alt={language === "ja" ? "実験背景・目的" : "Experimental Background & Objectives"}
                   fill
                   className="object-contain"
@@ -162,7 +163,7 @@ export default function EarTagIdentificationPage() {
                 style={{ height: "auto", minHeight: "250px" }}
               >
                 <Image
-                  src="/images/research-simizu2.png"
+                  src={getImagePath("/images/research-simizu2.png")}
                   alt={language === "ja" ? "実験環境" : "Experimental Environment"}
                   fill
                   className="object-contain"
@@ -185,7 +186,7 @@ export default function EarTagIdentificationPage() {
                 style={{ height: "auto", minHeight: "250px" }}
               >
                 <Image
-                  src="/images/research-siihara3.png"
+                  src={getImagePath("/images/research-siihara3.png")}
                   alt={language === "ja" ? "提案手法" : "Proposed Method"}
                   fill
                   className="object-contain"
@@ -203,7 +204,7 @@ export default function EarTagIdentificationPage() {
                 style={{ height: "auto", minHeight: "250px" }}
               >
                 <Image
-                  src="/images/research-siihara4.png"
+                  src={getImagePath("/images/research-siihara4.png")}
                   alt={language === "ja" ? "実験結果" : "Experimental Results"}
                   fill
                   className="object-contain"

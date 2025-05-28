@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useLanguage } from "@/contexts/language-context"
 import Image from "next/image"
 import { achievements, Achievement } from "@/translations/achievements-data" // 新しいデータファイルをインポート
+import { getImagePath } from "@/lib/utils"
 
 // 業績ページの翻訳
 const achievementsTranslations = {
@@ -117,12 +118,12 @@ export default function AchievementsPage() {
       {/* メインコンテンツ */}
       <div className="flex-grow">
         <div className="container py-16">
-          {/* Achievements タイトル */}
+          {/* Research Achievements タイトル */}
           <div className="text-center mb-16">
-            <div className="relative w-full max-w-xl mx-auto h-32 mb-4">
+            <div className="relative w-full max-w-md mx-auto h-16 mb-4">
               <Image
-                src="/images/logo_research_achievements.png"
-                alt={t.title}
+                src={getImagePath("/images/logo_research_achievements.png")}
+                alt="Research Achievements"
                 fill
                 className="object-contain"
                 priority

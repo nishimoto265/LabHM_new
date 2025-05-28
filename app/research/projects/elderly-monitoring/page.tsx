@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { getImagePath } from "@/lib/utils"
 
 // 翻訳データを定義
 const translations = {
@@ -138,7 +139,7 @@ export default function ElderlyMonitoringPage() {
       <section 
         className="relative py-16 md:py-20 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/images/normal_header.png')"
+          backgroundImage: `url(${getImagePath('/images/normal_header.png')})`
         }}
       >
         {/* オーバーレイ */}
@@ -165,7 +166,7 @@ export default function ElderlyMonitoringPage() {
                 style={{ height: "auto", minHeight: "300px" }}
               >
                 <Image
-                  src="/images/research-remon1.png"
+                  src={getImagePath("/images/research-remon1.png")}
                   alt={translations.systemOverview.title[language]}
                   fill
                   className="object-contain"

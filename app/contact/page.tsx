@@ -1,12 +1,16 @@
+"use client"
+
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { getImagePath } from "@/lib/utils"
+import { getImagePath, getLinkPath } from "@/lib/utils"
+import { useState } from "react"
 
 export default function ContactPage() {
   const language = "ja"
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const translations = {
     title: {
@@ -67,6 +71,88 @@ export default function ContactPage() {
     },
   }
 
+  // フォーム送信処理
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    
+    const formData = new FormData(e.currentTarget)
+    const data = {
+      name: formData.get('name') as string,
+      organization: formData.get('organization') as string,
+      email: formData.get('email') as string,
+      phone: formData.get('phone') as string,
+      subject: formData.get('subject') as string,
+      message: formData.get('message') as string,
+    }
+    
+    // 静的エクスポート環境かどうかを確認
+    const isStaticExport = typeof window !== 'undefined' && 
+      window.location.pathname.includes('/imagelab/')
+    
+    if (isStaticExport) {
+      // 静的サイトの場合はmailtoリンクを使用
+      const mailtoBody = `
+お名前: ${data.name}
+所属組織: ${data.organization || '未記入'}
+メールアドレス: ${data.email}
+電話番号: ${data.phone || '未記入'}
+
+お問い合わせ内容:
+${data.message}`
+
+      const mailtoLink = `mailto:daikonnekonokannzume@gmail.com?subject=${encodeURIComponent(data.subject)}&body=${encodeURIComponent(mailtoBody)}`
+      
+      try {
+        window.location.href = mailtoLink
+        
+        // ユーザーに説明を表示
+        setTimeout(() => {
+          alert(`メールクライアントを起動しています。
+
+もしメールクライアントが開かない場合は、以下の情報を手動でコピーしてメールを送信してください：
+
+宛先: daikonnekonokannzume@gmail.com
+件名: ${data.subject}
+
+内容:
+${mailtoBody}`)
+        }, 1000)
+        
+      } catch (error) {
+        console.error('Mailto error:', error)
+        alert(`メールクライアントの起動に失敗しました。
+以下の情報を手動でコピーしてメールを送信してください：
+
+宛先: daikonnekonokannzume@gmail.com
+件名: ${data.subject}
+
+内容:
+${mailtoBody}`)
+      }
+    } else {
+      // 開発環境では通常のAPI送信を試行
+      try {
+        const response = await fetch(getLinkPath('/api/contact'), {
+          method: 'POST',
+          body: formData,
+        })
+        
+        if (response.ok) {
+          alert('送信が完了しました。ありがとうございます。')
+          e.currentTarget.reset()
+        } else {
+          throw new Error('送信に失敗しました')
+        }
+      } catch (error) {
+        console.error('Contact form error:', error)
+        alert('送信に失敗しました。直接メールでお問い合わせください。')
+      }
+    }
+    
+    setIsSubmitting(false)
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* ヘッダーセクション */}
@@ -91,7 +177,7 @@ export default function ContactPage() {
       <div className="flex-grow pb-16"> {/* 下のパディングのみ追加 */}
         <div className="container">
           <div className="max-w-3xl mx-auto">
-            <form className="space-y-6" action="/api/contact" method="POST">
+            <form className="space-y-6" action="/api/contact" method="POST" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="name">
@@ -130,7 +216,7 @@ export default function ContactPage() {
               </div>
 
               <div className="text-center">
-                <Button type="submit" className="px-8">
+                <Button type="submit" className="px-8" disabled={isSubmitting}>
                   {translations.submit[language]}
                 </Button>
               </div>

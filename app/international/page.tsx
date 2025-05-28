@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { useLanguage } from "@/contexts/language-context"
 import { internationalTranslations } from "@/translations/international"
+import { getImagePath } from "@/lib/utils"
 
 // 国際連携データの型定義
 type InternationalProgram = {
@@ -25,21 +26,21 @@ export default function InternationalPage() {
       id: "sakura-science",
       title: t.programs.sakuraScience.title,
       description: t.programs.sakuraScience.description,
-      image: "/images/sakura_logo.png",
+      image: getImagePath("/images/sakura_logo.png"),
       link: "/activities/sakura-science",
     },
     {
       id: "international-conferences",
       title: t.programs.internationalConferences.title,
       description: t.programs.internationalConferences.description,
-      image: "/images/inter_conf.jpg",
+      image: getImagePath("/images/inter_conf.jpg"),
       link: "/achievements#international",
     },
     {
       id: "exchange-students",
       title: t.programs.exchangeStudents.title,
       description: t.programs.exchangeStudents.description,
-      image: "/images/ryuugakusei.jpg",
+      image: getImagePath("/images/ryuugakusei.jpg"),
       link: "/members#students",
     },
   ]
@@ -51,9 +52,9 @@ export default function InternationalPage() {
         <div className="py-16">
           {/* International Collaboration タイトル */}
           <div className="text-center mb-16">
-            <div className="relative w-full max-w-xl mx-auto h-32 mb-4">
+            <div className="relative w-full max-w-md mx-auto h-16 mb-4">
               <Image
-                src="/images/logo_international_collaboration.png"
+                src={getImagePath("/images/logo_international_collaboration.png")}
                 alt="International Collaboration"
                 fill
                 className="object-contain"

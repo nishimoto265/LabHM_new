@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { getImagePath } from "@/lib/utils"
 
 // SDGsアイコンのマッピング
 const sdgsIcons: { [key: number]: { name: string; path: string } } = {
@@ -21,7 +22,7 @@ export default function Local5GProjectPage() {
       <section 
         className="relative py-16 md:py-20 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/images/normal_header.png')"
+          backgroundImage: `url(${getImagePath('/images/normal_header.png')})`
         }}
       >
         {/* オーバーレイ */}

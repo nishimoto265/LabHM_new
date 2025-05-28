@@ -24,10 +24,9 @@ const nextConfig = {
   },
   // 静的エクスポート用の設定（STATIC_EXPORT環境変数がtrueの時のみ適用）
   ...(process.env.STATIC_EXPORT === 'true' && {
+    basePath: '/imagelab',
     output: 'export',
     trailingSlash: true,
-    basePath: '/imagelab',
-    assetPrefix: '/imagelab',
   }),
   experimental: {
     webpackBuildWorker: true,

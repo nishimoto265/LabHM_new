@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { getImagePath } from "@/lib/utils"
 import { Card, CardContent } from "@/components/ui/card"
 
 export default function GovernmentProjectPage() {
@@ -10,7 +11,7 @@ export default function GovernmentProjectPage() {
       <section 
         className="relative py-16 md:py-20 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/images/normal_header.png')"
+          backgroundImage: `url(${getImagePath('/images/normal_header.png')})`
         }}
       >
         {/* オーバーレイ */}
@@ -31,7 +32,7 @@ export default function GovernmentProjectPage() {
         <div className="container">
           <div className="max-w-4xl mx-auto">
             <div className="relative h-80 mb-8 rounded-lg overflow-hidden">
-              <Image src="/images/goverment-project.png" alt="本試験の構成図" fill className="object-contain" />
+              <Image src={getImagePath("/images/goverment-project.png")} alt="本試験の構成図" fill className="object-contain" />
             </div>
 
             <div className="space-y-8">

@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { getImagePath } from "@/lib/utils"
 
 export default function CalfBehaviorAnalysisPage() {
   const language = "ja"
@@ -114,7 +115,7 @@ export default function CalfBehaviorAnalysisPage() {
       <section 
         className="relative py-16 md:py-20 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/images/normal_header.png')"
+          backgroundImage: `url(${getImagePath('/images/normal_header.png')})`
         }}
       >
         {/* オーバーレイ */}
@@ -150,7 +151,7 @@ export default function CalfBehaviorAnalysisPage() {
                 style={{ height: "auto", minHeight: "250px" }}
               >
                 <Image
-                  src="/images/research-nishiyama1.png"
+                  src={getImagePath("/images/research-nishiyama1.png")}
                   alt={language === "ja" ? "1戸当たり飼養頭数の推移" : "Trend in the Number of Cattle per Farm"}
                   fill
                   className="object-contain"
@@ -166,7 +167,7 @@ export default function CalfBehaviorAnalysisPage() {
                 style={{ height: "auto", minHeight: "250px" }}
               >
                 <Image
-                  src="/images/research-nishiyama2.png"
+                  src={getImagePath("/images/research-nishiyama2.png")}
                   alt={language === "ja" ? "実験環境" : "Experimental Environment"}
                   fill
                   className="object-contain"
@@ -184,7 +185,7 @@ export default function CalfBehaviorAnalysisPage() {
                 style={{ height: "auto", minHeight: "250px" }}
               >
                 <Image
-                  src="/images/research-nishiyama3.png"
+                  src={getImagePath("/images/research-nishiyama3.png")}
                   alt={language === "ja" ? "実験結果" : "Experimental Results"}
                   fill
                   className="object-contain"

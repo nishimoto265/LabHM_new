@@ -51,7 +51,7 @@ export default function CattleIdentificationPage() {
                 style={{ height: "auto", minHeight: "250px" }}
               >
                 <Image
-                  src="/images/research-siihara1.png"
+                  src={getImagePath("/images/research-siihara1.png")}
                   alt={language === "ja" ? "実験背景・目的" : "Experimental Background & Objectives"}
                   fill
                   className="object-contain"
@@ -69,7 +69,7 @@ export default function CattleIdentificationPage() {
                 style={{ height: "auto", minHeight: "250px" }}
               >
                 <Image
-                  src="/images/research-siihara2.png"
+                  src={getImagePath("/images/research-siihara2.png")}
                   alt={language === "ja" ? "実験環境" : "Experimental Environment"}
                   fill
                   className="object-contain"
@@ -92,7 +92,7 @@ export default function CattleIdentificationPage() {
                 style={{ height: "auto", minHeight: "250px" }}
               >
                 <Image
-                  src="/images/research-siihara3.png"
+                  src={getImagePath("/images/research-siihara3.png")}
                   alt={language === "ja" ? "提案手法" : "Proposed Method"}
                   fill
                   className="object-contain"
@@ -110,7 +110,7 @@ export default function CattleIdentificationPage() {
                 style={{ height: "auto", minHeight: "250px" }}
               >
                 <Image
-                  src="/images/research-siihara4.png"
+                  src={getImagePath("/images/research-siihara4.png")}
                   alt={language === "ja" ? "実験結果" : "Experimental Results"}
                   fill
                   className="object-contain"

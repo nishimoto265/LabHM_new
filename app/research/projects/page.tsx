@@ -66,7 +66,7 @@ export default function ResearchProjectsPage() {
         id: "cattle-feeding",
         title: t.projects.cattleFeeding.title,
         description: t.projects.cattleFeeding.description,
-        image: "/images/research-ishikawa.png",
+        image: getImagePath("/images/research-ishikawa.png"),
         link: "/research/projects/cattle-feeding",
         keywords: ["AI", language === "ja" ? "牛" : "Cattle"],
       },
@@ -74,7 +74,7 @@ export default function ResearchProjectsPage() {
         id: "calving-prediction",
         title: t.projects.calvingPrediction.title,
         description: t.projects.calvingPrediction.description,
-        image: "/images/research-murayama.png",
+        image: getImagePath("/images/research-murayama.png"),
         link: "/research/projects/calving-prediction",
         keywords: ["AI", language === "ja" ? "牛" : "Cattle"],
       },
@@ -82,7 +82,7 @@ export default function ResearchProjectsPage() {
         id: "elderly-monitoring",
         title: t.projects.elderlyMonitoring.title,
         description: t.projects.elderlyMonitoring.description,
-        image: "/images/research-remon.png",
+        image: getImagePath("/images/research-remon.png"),
         link: "/research/projects/elderly-monitoring",
         keywords: ["AI", language === "ja" ? "人" : "Human"],
       },
@@ -90,7 +90,7 @@ export default function ResearchProjectsPage() {
         id: "fetal-monitoring",
         title: t.projects.fetalMonitoring.title,
         description: t.projects.fetalMonitoring.description,
-        image: "/images/research-tunn.png",
+        image: getImagePath("/images/research-tunn.png"),
         link: "/research/projects/fetal-monitoring",
         keywords: ["AI", language === "ja" ? "人" : "Human", language === "ja" ? "医療" : "Medical"],
       },
@@ -98,7 +98,7 @@ export default function ResearchProjectsPage() {
         id: "bcs-evaluation",
         title: t.projects.bcsEvaluation.title,
         description: t.projects.bcsEvaluation.description,
-        image: "/images/research-tikunami.png",
+        image: getImagePath("/images/research-tikunami.png"),
         link: "/research/projects/bcs-evaluation",
         keywords: ["AI", language === "ja" ? "牛" : "Cattle"],
       },
@@ -106,7 +106,7 @@ export default function ResearchProjectsPage() {
         id: "cattle-identification",
         title: t.projects.cattleIdentification.title,
         description: t.projects.cattleIdentification.description,
-        image: "/images/research-siihara.png",
+        image: getImagePath("/images/research-siihara.png"),
         link: "/research/projects/cattle-identification",
         keywords: ["AI", language === "ja" ? "牛" : "Cattle"],
       },
@@ -114,7 +114,7 @@ export default function ResearchProjectsPage() {
         id: "ear-tag-identification",
         title: t.projects.earTagIdentification.title,
         description: t.projects.earTagIdentification.description,
-        image: "/images/research-simizu.png",
+        image: getImagePath("/images/research-simizu.png"),
         link: "/research/projects/ear-tag-identification",
         keywords: ["AI", language === "ja" ? "牛" : "Cattle"],
       },
@@ -122,7 +122,7 @@ export default function ResearchProjectsPage() {
         id: "calf-behavior-analysis",
         title: t.projects.calfBehaviorAnalysis.title,
         description: t.projects.calfBehaviorAnalysis.description,
-        image: "/images/research-nishiyama.png",
+        image: getImagePath("/images/research-nishiyama.png"),
         link: "/research/projects/calf-behavior-analysis",
         keywords: ["AI", language === "ja" ? "牛" : "Cattle"],
       },
@@ -207,7 +207,7 @@ export default function ResearchProjectsPage() {
                   <div className="grid md:grid-cols-3 gap-6">
                     <div className="relative aspect-[4/3] md:col-span-1">
                       <Image
-                        src={getImagePath(project.image || "/images/no_image.png")}
+                        src={project.image}
                         alt={project.title}
                         fill
                         className="object-contain"

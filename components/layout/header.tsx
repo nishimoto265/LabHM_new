@@ -47,7 +47,7 @@ const Header = () => {
       }
     } else {
       // 他のページからの場合は、ページ遷移してからハッシュに移動
-      router.push(`/members${hash}`)
+      window.location.href = `/members${hash}`
     }
   }
 

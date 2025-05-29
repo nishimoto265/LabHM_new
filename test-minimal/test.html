@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>最小構成テスト</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .success {
+            color: #28a745;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="success">✅ 最小構成テスト成功！</h1>
+        
+        <div class="info">
+            <h3>📋 テスト内容</h3>
+            <ul>
+                <li>test.html ファイルの表示</li>
+                <li>.htaccess ファイルの動作</li>
+                <li>サーバーアクセス権限</li>
+            </ul>
+        </div>
+        
+        <p><strong>時刻:</strong> <span id="datetime"></span></p>
+        
+        <div class="info">
+            <h3>🔍 確認項目</h3>
+            <ul>
+                <li>このページが表示されれば、基本的なHTMLファイルアクセスは正常</li>
+                <li>403エラーが出なければ、.htaccessファイルが正しく動作</li>
+                <li>500エラーが出なければ、.htaccess設定に問題なし</li>
+            </ul>
+        </div>
+        
+        <h3>🎯 次のステップ</h3>
+        <p>このテストが成功したら、段階的に機能を追加していきます。</p>
+    </div>
+    
+    <script>
+        document.getElementById('datetime').textContent = new Date().toLocaleString('ja-JP');
+    </script>
+</body>
+</html> 

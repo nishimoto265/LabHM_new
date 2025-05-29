@@ -1,3 +1,7 @@
+import fs from 'fs'
+import path from 'path'
+import CopyWebpackPlugin from 'copy-webpack-plugin'
+
 let userConfig = undefined
 try {
   // try to import ESM first
@@ -33,6 +37,43 @@ const nextConfig = {
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
   },
+  // .htaccessファイルをoutディレクトリにコピー
+  webpack: (config, { isServer }) => {
+    if (!isServer && process.env.STATIC_EXPORT === 'true') {
+      // .htaccessファイルをoutディレクトリにコピー
+      config.plugins.push({
+        apply: (compiler) => {
+          compiler.hooks.afterEmit.tap('CopyHtaccess', () => {
+            try {
+              const htaccessSource = path.join(process.cwd(), '.htaccess')
+              const htaccessDest = path.join(process.cwd(), 'out', '.htaccess')
+              
+              if (fs.existsSync(htaccessSource)) {
+                fs.copyFileSync(htaccessSource, htaccessDest)
+                console.log('✅ .htaccess copied to out directory')
+              }
+            } catch (error) {
+              console.warn('⚠️ Failed to copy .htaccess:', error.message)
+            }
+          })
+        }
+      })
+    }
+    if (!isServer) {
+      config.plugins.push(
+        new CopyWebpackPlugin({
+          patterns: [
+            {
+              from: 'public/.htaccess',
+              to: '.htaccess',
+              noErrorOnMissing: true,
+            },
+          ],
+        })
+      );
+    }
+    return config
+  }
 }
 
 if (userConfig) {
@@ -51,6 +92,43 @@ if (userConfig) {
     } else {
       nextConfig[key] = config[key]
     }
+  }
+}
+
+// ビルド後の処理で.htaccessファイルを生成
+if (process.env.NODE_ENV === 'production') {
+  const htaccessContent = `# 古い形式のアクセス制御（Apache 2.2互換）
+order deny,allow
+deny from all
+allow from all
+
+# デフォルトページ設定
+DirectoryIndex index.html
+
+# リライトエンジン有効化
+RewriteEngine On
+
+# home.php -> index.html へのリダイレクト
+RewriteRule ^home\\.php$ /imagelab/index.html [L,R=301]
+
+# ルートアクセス時
+RewriteRule ^$ /imagelab/index.html [L]
+
+# HTML拡張子なしでアクセス可能にする
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html [L]
+
+# 存在しないページは404.htmlへ
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /imagelab/404.html [L]`;
+
+  // outディレクトリが存在する場合のみ.htaccessファイルを作成
+  const outDir = './out';
+  if (fs.existsSync(outDir)) {
+    fs.writeFileSync(path.join(outDir, '.htaccess'), htaccessContent);
+    fs.writeFileSync(path.join(outDir, 'htaccess.txt'), htaccessContent);
+    console.log('✅ .htaccess and htaccess.txt files created in out directory');
   }
 }
 

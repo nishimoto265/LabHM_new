@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "STATIC_EXPORT=true next build",
+    "build": "next build",
+    "build:static": "STATIC_EXPORT=true next build && cp .htaccess out/ && cp .htaccess out/htaccess.txt",
     "start": "next start",
     "lint": "next lint",
-    "export": "next build && next export"
+    "test-server": "cd test-server && python3 -m http.server 8000"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

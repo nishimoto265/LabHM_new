@@ -8,6 +8,7 @@ TARGET_DIR="/var/www/html/imagelab"
 # 色付き出力
 GREEN='\033[0;32m'
 RED='\033[0;31m'
+YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 echo "🚀 デプロイを開始します..."
@@ -17,6 +18,20 @@ if [ ! -d "out" ]; then
     echo -e "${RED}❌ エラー: 'out' ディレクトリが見つかりません。先にビルドを実行してください。${NC}"
     echo "実行: STATIC_EXPORT=true npm run build"
     exit 1
+fi
+
+# .htaccessファイルの確認とコピー
+if [ ! -f "out/.htaccess" ]; then
+    echo -e "${YELLOW}⚠️  .htaccessファイルがoutディレクトリにありません。コピーします...${NC}"
+    if [ -f ".htaccess" ]; then
+        cp .htaccess out/
+        echo -e "${GREEN}✅ .htaccessファイルをoutディレクトリにコピーしました。${NC}"
+    else
+        echo -e "${RED}❌ エラー: .htaccessファイルが見つかりません。${NC}"
+        exit 1
+    fi
+else
+    echo -e "${GREEN}✅ .htaccessファイルが確認されました。${NC}"
 fi
 
 # ターゲットディレクトリが存在するか確認

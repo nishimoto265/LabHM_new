@@ -1,0 +1,47 @@
+# Apache configuration for static Next.js site
+
+# Directory permissions
+Options +Indexes +FollowSymLinks
+AllowOverride All
+Require all granted
+
+# Enable rewrite engine
+RewriteEngine On
+
+# Default document
+DirectoryIndex index.html
+
+# Handle root requests
+RewriteRule ^$ index.html [L]
+
+# Serve HTML files without extension
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html [L]
+
+# Handle directory requests
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_URI} !/$
+RewriteRule ^(.*)$ $1/ [L,R=301]
+
+# Handle hash links properly  
+RewriteCond %{REQUEST_URI} ^/members$
+RewriteRule ^(.*)$ members.html [L]
+
+# Handle members directory with trailing slash
+RewriteCond %{REQUEST_URI} ^/members/$
+RewriteRule ^(.*)$ members.html [L]
+
+# Add cache headers for images
+<FilesMatch "\.(jpg|jpeg|png|gif|webp|svg)$">
+</FilesMatch>
+
+# Add cache headers for static assets
+<FilesMatch "\.(js|css)$">
+</FilesMatch>
+
+# Ensure proper MIME types
+AddType image/webp .webp
+AddType application/javascript .js
+AddType text/css .css

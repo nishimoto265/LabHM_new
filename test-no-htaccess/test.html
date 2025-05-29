@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>.htaccessなしテスト</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff3cd;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .warning {
+            color: #856404;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .info {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border: 1px solid #ffeaa7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="warning">⚠️ .htaccessなしテスト</h1>
+        
+        <div class="info">
+            <h3>📋 このテストの目的</h3>
+            <ul>
+                <li>.htaccessファイルなしでHTMLファイルにアクセス可能か確認</li>
+                <li>サーバーの基本的なアクセス権限を確認</li>
+                <li>403エラーの原因が.htaccessかサーバー設定かを特定</li>
+            </ul>
+        </div>
+        
+        <p><strong>時刻:</strong> <span id="datetime"></span></p>
+        
+        <div class="info">
+            <h3>🔍 結果の解釈</h3>
+            <ul>
+                <li><strong>このページが表示される</strong> → サーバーの基本アクセスは正常、.htaccessが問題</li>
+                <li><strong>403エラーが出る</strong> → サーバーのディレクトリアクセス権限に問題</li>
+                <li><strong>404エラーが出る</strong> → ファイルがアップロードされていない</li>
+            </ul>
+        </div>
+        
+        <h3>📁 ディレクトリ構成</h3>
+        <pre>test-no-htaccess/
+└── test.html (このファイル)
+※ .htaccessファイルは意図的に含めていません</pre>
+    </div>
+    
+    <script>
+        document.getElementById('datetime').textContent = new Date().toLocaleString('ja-JP');
+    </script>
+</body>
+</html> 

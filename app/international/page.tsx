@@ -52,7 +52,7 @@ export default function InternationalPage() {
         <div className="py-16">
           {/* International Collaboration タイトル */}
           <div className="text-center mb-16">
-            <div className="relative w-full max-w-md mx-auto h-16 mb-4">
+            <div className="relative w-full max-w-xl mx-auto h-32 mb-4">
               <Image
                 src={getImagePath("/images/logo_international_collaboration.png")}
                 alt="International Collaboration"

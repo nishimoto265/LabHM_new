@@ -120,7 +120,7 @@ export default function AchievementsPage() {
         <div className="container py-16">
           {/* Research Achievements タイトル */}
           <div className="text-center mb-16">
-            <div className="relative w-full max-w-md mx-auto h-16 mb-4">
+            <div className="relative w-full max-w-xl mx-auto h-32 mb-4">
               <Image
                 src={getImagePath("/images/logo_research_achievements.png")}
                 alt="Research Achievements"

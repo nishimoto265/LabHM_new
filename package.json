@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:static": "STATIC_EXPORT=true next build && cp .htaccess out/ && cp .htaccess out/htaccess.txt",
+    "build:static": "./scripts/build-static.sh",
     "start": "next start",
+    "server": "cd out && python3 -m http.server 8000",
     "lint": "next lint",
     "test-server": "cd test-server && python3 -m http.server 8000"
   },

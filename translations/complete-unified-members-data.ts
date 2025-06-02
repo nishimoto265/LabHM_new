@@ -8,6 +8,22 @@ export const completeUnifiedAlumniMembers: UnifiedMember[] = [
   // ========= 令和6年度 =========
   // 博士課程
   {
+    id: "yehtet-r6",
+    name: "Ye Htet",
+    nameEn: "Ye Htet",
+    isAlumni: true,
+    program: "doctoral",
+    degreeType: "doctor",
+    graduationYear: "2024",
+    academicYear: "令和6年度",
+    academicYearEn: "2024 Academic Year",
+    image: "/images/no_image.png",
+    researchTopic: {
+      ja: "研究内容：A Study on Real-time Elderly Monitoring....Elderly Care Center",
+      en: "Research: A Study on Real-time Elderly Monitoring....Elderly Care Center",
+    },
+  },
+  {
     id: "sumyatnoe-r6",
     name: "Su Myat Noe（ｽ ﾐｬ ﾉｰ）",
     nameEn: "Su Myat Noe",
@@ -19,8 +35,8 @@ export const completeUnifiedAlumniMembers: UnifiedMember[] = [
     academicYearEn: "2024 Academic Year",
     image: "/images/no_image.png",
     researchTopic: {
-      ja: "研究内容：（博士論文研究内容）",
-      en: "Research: (Doctoral research topic)",
+      ja: "研究内容：A Study on Deep Learning-based Automated Detection and Tracking of Estrus Behavior in Black Cattle",
+      en: "Research: A Study on Deep Learning-based Automated Detection and Tracking of Estrus Behavior in Black Cattle",
     },
   },
   {
@@ -35,8 +51,8 @@ export const completeUnifiedAlumniMembers: UnifiedMember[] = [
     academicYearEn: "2024 Academic Year",
     image: "/images/no_image.png",
     researchTopic: {
-      ja: "研究内容：（博士論文研究内容）",
-      en: "Research: (Doctoral research topic)",
+      ja: "研究内容：A Study on Real-time Cattle Monitoring System for Calving Time Prediction",
+      en: "Research: A Study on Real-time Cattle Monitoring System for Calving Time Prediction",
     },
   },
 
@@ -53,8 +69,8 @@ export const completeUnifiedAlumniMembers: UnifiedMember[] = [
     academicYearEn: "2024 Academic Year",
     image: "/images/no_image.png",
     researchTopic: {
-      ja: "研究内容：（修士論文研究内容）",
-      en: "Research: (Masters research topic)",
+      ja: "研究内容：歩行情報による歩行状態の解析と分類に関する研究",
+      en: "Research: Analysis and Classification of Walking States Using Walking Information",
     },
   },
   {
@@ -69,8 +85,8 @@ export const completeUnifiedAlumniMembers: UnifiedMember[] = [
     academicYearEn: "2024 Academic Year",
     image: "/images/no_image.png",
     researchTopic: {
-      ja: "研究内容：（修士論文研究内容）",
-      en: "Research: (Masters research topic)",
+      ja: "研究内容：歩行中の乳牛に対するBCS評価の自動化に関する研究",
+      en: "Research: Automation of BCS Evaluation for Cows During Walking",
     },
   },
   {
@@ -85,8 +101,8 @@ export const completeUnifiedAlumniMembers: UnifiedMember[] = [
     academicYearEn: "2024 Academic Year",
     image: "/images/no_image.png",
     researchTopic: {
-      ja: "研究内容：（修士論文研究内容）",
-      en: "Research: (Masters research topic)",
+      ja: "研究内容：画像処理技術を用いた子牛の行動解析に関する研究",
+      en: "Research: Behavior Analysis of Calf Using Image Processing Technology",
     },
   },
 
@@ -103,8 +119,8 @@ export const completeUnifiedAlumniMembers: UnifiedMember[] = [
     academicYearEn: "2024 Academic Year",
     image: "/images/no_image.png",
     researchTopic: {
-      ja: "研究内容：（卒業研究内容）",
-      en: "Research: (Bachelor research topic)",
+      ja: "研究内容：画像処理技術を用いたウナギ養殖における水の三要素の解析",
+      en: "Research: Analysis of Water Three Elements in Eel Farming Using Image Processing Technology",
     },
   },
   {
@@ -119,8 +135,8 @@ export const completeUnifiedAlumniMembers: UnifiedMember[] = [
     academicYearEn: "2024 Academic Year",
     image: "/images/no_image.png",
     researchTopic: {
-      ja: "研究内容：（卒業研究内容）",
-      en: "Research: (Bachelor research topic)",
+      ja: "研究内容：深度カメラを用いた高齢者の行動推定に関する研究",
+      en: "Research: Behavior Estimation of the Elderly Using Depth Camera",
     },
   },
   {
@@ -135,8 +151,8 @@ export const completeUnifiedAlumniMembers: UnifiedMember[] = [
     academicYearEn: "2024 Academic Year",
     image: "/images/no_image.png",
     researchTopic: {
-      ja: "研究内容：（卒業研究内容）",
-      en: "Research: (Bachelor research topic)",
+      ja: "研究内容：RGBカメラと深層学習を用いた子牛郡の行動解析",
+      en: "Research: Behavior Analysis of Calf Using RGB Camera and Deep Learning",
     },
   },
   {
@@ -151,8 +167,8 @@ export const completeUnifiedAlumniMembers: UnifiedMember[] = [
     academicYearEn: "2024 Academic Year",
     image: "/images/no_image.png",
     researchTopic: {
-      ja: "研究内容：（卒業研究内容）",
-      en: "Research: (Bachelor research topic)",
+      ja: "研究内容：画像処理技術を用いた牛の難産予測のための特徴量抽出に関する研究",
+      en: "Research: Feature Extraction for Calf Difficulty Prediction Using Image Processing Technology",
     },
   },
   {
@@ -167,8 +183,8 @@ export const completeUnifiedAlumniMembers: UnifiedMember[] = [
     academicYearEn: "2024 Academic Year",
     image: "/images/no_image.png",
     researchTopic: {
-      ja: "研究内容：（卒業研究内容）",
-      en: "Research: (Bachelor research topic)",
+      ja: "研究内容：深度カメラを用いた牛の体重推定",
+      en: "Research: Weight Estimation of Cattle Using Depth Camera",
     },
   },
 

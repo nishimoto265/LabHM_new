@@ -140,14 +140,14 @@ export default function Home() {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Link href={`/research/projects?category=${encodeURIComponent(language === "ja" ? "牛" : "Cattle")}`} className="group">
+            <Link href="/research/projects/cattle-feeding" className="group">
               <div className="overflow-hidden h-full bg-white">
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative h-48 overflow-hidden border-b border-gray-200">
                   <Image
-                    src={getImagePath("/logo.png")}
-                    alt={t.researchProjects.cowFeeding}
+                    src={getImagePath("/images/research-ishikawa.png")}
+                    alt="牛の給餌行動解析システム"
                     fill
-                    className="object-contain p-4 transition-transform group-hover:scale-105 bg-white"
+                    className="object-cover transition-transform group-hover:scale-105"
                   />
                   <div className="absolute top-2 left-2 bg-green-700 text-white text-xs px-2 py-1 rounded z-10">
                     {t.researchCategories.cow}
@@ -155,20 +155,41 @@ export default function Home() {
                 </div>
                 <div className="p-4">
                   <h3 className="mt-2 font-medium group-hover:text-primary transition-colors">
-                    {t.researchProjects.cowFeeding}
+                    {language === "ja" ? "牛の給餌行動解析システム" : "Cattle Feeding Behavior Analysis System"}
                   </h3>
                 </div>
               </div>
             </Link>
 
-            <Link href={`/research/projects?category=${encodeURIComponent(language === "ja" ? "人" : "Human")}`} className="group">
+            <Link href="/research/projects/calving-prediction" className="group">
               <div className="overflow-hidden h-full bg-white">
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative h-48 overflow-hidden border-b border-gray-200">
                   <Image
-                    src={getImagePath("/logo.png")}
-                    alt={t.researchProjects.elderlyMonitoring}
+                    src={getImagePath("/images/research-murayama.png")}
+                    alt="分娩予測システム"
                     fill
-                    className="object-contain p-4 transition-transform group-hover:scale-105 bg-white"
+                    className="object-cover transition-transform group-hover:scale-105"
+                  />
+                  <div className="absolute top-2 left-2 bg-green-700 text-white text-xs px-2 py-1 rounded z-10">
+                    {t.researchCategories.cow}
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="mt-2 font-medium group-hover:text-primary transition-colors">
+                    {language === "ja" ? "分娩予測システム" : "Calving Prediction System"}
+                  </h3>
+                </div>
+              </div>
+            </Link>
+
+            <Link href="/research/projects/elderly-monitoring" className="group">
+              <div className="overflow-hidden h-full bg-white">
+                <div className="relative h-48 overflow-hidden border-b border-gray-200">
+                  <Image
+                    src={getImagePath("/images/research-remon.png")}
+                    alt="高齢者見守りシステム"
+                    fill
+                    className="object-cover transition-transform group-hover:scale-105"
                   />
                   <div className="absolute top-2 left-2 bg-blue-700 text-white text-xs px-2 py-1 rounded z-10">
                     {t.researchCategories.human}
@@ -176,20 +197,20 @@ export default function Home() {
                 </div>
                 <div className="p-4">
                   <h3 className="mt-2 font-medium group-hover:text-primary transition-colors">
-                    {t.researchProjects.elderlyMonitoring}
+                    {language === "ja" ? "高齢者見守りシステム" : "Elderly Monitoring System"}
                   </h3>
                 </div>
               </div>
             </Link>
 
-            <Link href={`/research/projects?category=${encodeURIComponent(language === "ja" ? "医療" : "Medical")}`} className="group">
+            <Link href="/research/projects/fetal-monitoring" className="group">
               <div className="overflow-hidden h-full bg-white">
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative h-48 overflow-hidden border-b border-gray-200">
                   <Image
-                    src={getImagePath("/logo.png")}
-                    alt={t.researchProjects.fetalMonitoring}
+                    src={getImagePath("/images/research-tunn.png")}
+                    alt="胎児モニタリングシステム"
                     fill
-                    className="object-contain p-4 transition-transform group-hover:scale-105 bg-white"
+                    className="object-cover transition-transform group-hover:scale-105"
                   />
                   <div className="absolute top-2 left-2 bg-red-700 text-white text-xs px-2 py-1 rounded z-10">
                     {t.researchCategories.medical}
@@ -197,28 +218,7 @@ export default function Home() {
                 </div>
                 <div className="p-4">
                   <h3 className="mt-2 font-medium group-hover:text-primary transition-colors">
-                    {t.researchProjects.fetalMonitoring}
-                  </h3>
-                </div>
-              </div>
-            </Link>
-
-            <Link href="/research/projects" className="group">
-              <div className="overflow-hidden h-full bg-white">
-                <div className="relative h-48 overflow-hidden">
-                  <Image
-                    src={getImagePath("/logo.png")}
-                    alt={t.researchProjects.waterQuality}
-                    fill
-                    className="object-contain p-4 transition-transform group-hover:scale-105 bg-white"
-                  />
-                  <div className="absolute top-2 left-2 bg-gray-700 text-white text-xs px-2 py-1 rounded z-10">
-                    {t.researchCategories.other}
-                  </div>
-                </div>
-                <div className="p-4">
-                  <h3 className="mt-2 font-medium group-hover:text-primary transition-colors">
-                    {t.researchProjects.waterQuality}
+                    {language === "ja" ? "胎児モニタリングシステム" : "Fetal Monitoring System"}
                   </h3>
                 </div>
               </div>

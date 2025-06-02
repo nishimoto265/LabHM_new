@@ -69,7 +69,7 @@ FileZillaでは削除できません。
 rm -rf /public_html/あ/
 
 よろしくお願いします。
-```
+``` 
 
 ## 🔧 FileZilla設定
 

@@ -1,6 +1,5 @@
 import fs from 'fs'
 import path from 'path'
-import CopyWebpackPlugin from 'copy-webpack-plugin'
 
 let userConfig = undefined
 try {
@@ -58,19 +57,6 @@ const nextConfig = {
           })
         }
       })
-    }
-    if (!isServer) {
-      config.plugins.push(
-        new CopyWebpackPlugin({
-          patterns: [
-            {
-              from: 'public/.htaccess',
-              to: '.htaccess',
-              noErrorOnMissing: true,
-            },
-          ],
-        })
-      );
     }
     return config
   }

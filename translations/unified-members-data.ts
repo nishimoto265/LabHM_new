@@ -339,6 +339,15 @@ export const unifiedCurrentStudents: UnifiedMember[] = [
     year: 1,
     image: "/images/no_image.png",
   },
+  {
+    id: "myoponeponeswe-m1",
+    name: "Myo Pone Pone Swe（ﾐｮ ﾎﾟﾝ ﾎﾟﾝ ｽｴ）",
+    nameEn: "Myo Pone Pone Swe",
+    isAlumni: false,
+    program: "masters",
+    year: 1,
+    image: "/images/no_image.png",
+  },
 
   // 学部生
   {

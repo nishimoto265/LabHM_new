@@ -1,7 +1,7 @@
 # 研究室ホームページ Ver.2
 
 これは、宮崎大学 情報処理システム研究室の新しいウェブサイトのプロジェクトです。
-**ホームページURL**: [https://www.cc.miyazaki-u.ac.jp/imagelab/home.php](https://www.cc.miyazaki-u.ac.jp/imagelab/)
+**ホームページURL**: [https://www.cc.miyazaki-u.ac.jp/imagelab](https://www.cc.miyazaki-u.ac.jp/imagelab/)
 
 ## 概要
 
